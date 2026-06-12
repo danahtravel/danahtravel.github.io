@@ -1,0 +1,158 @@
+---
+layout: base.njk
+title: Danah | Contact Us — Riyadh Travel Agency
+description: Get in touch with Danah Travel & Tourism in downtown Riyadh. Call, email, or visit our office for flight bookings, visa services, and tour packages.
+pageScript: /assets/js/contact-page.js
+includeHomepageScript: false
+---
+
+<!-- ============================================================
+     CONTACT HERO
+============================================================ -->
+<section id="contact-hero" class="section-py" style="background: linear-gradient(135deg, #0B1426 0%, #0F2050 100%); margin-top: var(--nav-h);">
+  <div class="container-xl">
+    <div class="text-center py-5">
+      <span class="tag reveal" style="background: rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.2);">
+        <i class="fas fa-envelope"></i> <span data-i18n="contact.tag">Contact</span>
+      </span>
+      <h1 class="display-3 fw-bold text-white mt-3 reveal d1" data-i18n="contact.title">Get in Touch</h1>
+      <p class="lead text-white-70 mx-auto" style="max-width: 700px;" data-i18n="contact.desc">Visit us in downtown Riyadh, send a message online, or call our travel experts — we're always ready to help.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTENT (Info + Form)
+============================================================ -->
+<section class="section-py bg-2">
+  <div class="container-xl">
+    <div class="row g-5">
+      <!-- Left: contact info + map -->
+      <div class="col-lg-5 reveal-left">
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-location-dot"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.addressLabel">Office Address</div>
+            <div class="c-val" data-i18n="contact.address">Al-Olaya Street, Al-Murabba District<br>Riyadh 12244, Saudi Arabia</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.phoneLabel">Phone</div>
+            <div class="c-val">+966 11 234 5678</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-mobile-screen"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.whatsappLabel">WhatsApp</div>
+            <div class="c-val">+966 50 123 4567</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.emailLabel">Email</div>
+            <div class="c-val">info@danahtravel.sa</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.hoursLabel">Office Hours</div>
+            <div class="c-val" data-i18n="contact.hours">Sunday–Thursday: 8:00 AM – 9:00 PM<br>Friday–Saturday: 10:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+		<div class="open-status-card">
+		  <div class="open-icon"><i class="fas fa-store"></i></div>
+		  <div>
+			<div class="open-label" data-i18n="contact.openStatus">Office Status</div>
+			<div class="open-badge" id="open-badge">Checking...</div>
+		  </div>
+		</div>
+        <!-- Google Maps embed (Al-Olaya, Riyadh) -->
+        <div class="map-wrap" id="dynamic-map" style="height: 300px;"></div>
+      </div>
+	  
+	  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+
+      <!-- Right: contact form -->
+      <div class="col-lg-7 reveal-right">
+        <div class="booking-wrap">
+          <h3 style="font-family:var(--ff-body);font-size:1.2rem;font-weight:700;margin-bottom:6px;" data-i18n="contact.formTitle">Send Us a Message</h3>
+          <p style="font-size:.875rem;margin-bottom:24px;" data-i18n="contact.formDesc">We typically respond within 2–4 hours during business hours.</p>
+          <form id="contact-form-page" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.yourName">Your Name</label>
+                <input type="text" class="form-control" id="contact-name" data-i18n-placeholder="contact.yourName_placeholder" placeholder="Full name" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.yourEmail">Email Address</label>
+                <input type="email" class="form-control" id="contact-email" data-i18n-placeholder="contact.yourEmail_placeholder" placeholder="you@example.com" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.yourPhone">Phone Number</label>
+                <input type="tel" class="form-control" id="contact-phone" data-i18n-placeholder="contact.yourPhone_placeholder" placeholder="+966 5X XXX XXXX">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.subject">Subject</label>
+                <select class="form-select" id="contact-subject" required>
+                  <option value="" data-i18n="contact.subject_placeholder">Select a topic</option>
+                  <option value="flight" data-i18n="contact.topic1">Flight Booking</option>
+                  <option value="visa" data-i18n="contact.topic2">Visa Services</option>
+                  <option value="tour" data-i18n="contact.topic3">Tour Package</option>
+                  <option value="hotel" data-i18n="contact.topic4">Hotel Booking</option>
+                  <option value="corporate" data-i18n="contact.topic5">Corporate Travel</option>
+                  <option value="complaint" data-i18n="contact.topic6">Complaint / Feedback</option>
+                  <option value="other" data-i18n="contact.topic7">Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label" data-i18n="contact.message">Message</label>
+                <textarea class="form-control" id="contact-message" data-i18n-placeholder="contact.message_placeholder" placeholder="Tell us about your travel plans or ask us anything…" rows="5" required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-blue w-100" style="justify-content:center;padding:14px;">
+                  <i class="fas fa-paper-plane"></i> <span data-i18n="contact.send">Send Message</span>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="form-msg mt-4" id="contact-msg-page" style="display: none;"></div>
+        </div>
+      </div>
+	  <div class="social-feed mt-5">
+		  <div class="foot-head mb-3" data-i18n="contact.followUs">Follow Us</div>
+		  <div class="row g-2">
+			<div class="col-4"><a href="#"><img src="https://picsum.photos/120/120?random=1" class="w-100 rounded"></a></div>
+			<div class="col-4"><a href="#"><img src="https://picsum.photos/120/120?random=2" class="w-100 rounded"></a></div>
+			<div class="col-4"><a href="#"><img src="https://picsum.photos/120/120?random=3" class="w-100 rounded"></a></div>
+		  </div>
+		</div>
+    </div>
+  </div>
+</section>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/966501234567?text=Hello%20Danah%20Travel%2C%20I%20need%20assistance%20with..." 
+   class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Floating Call Button (optional) -->
+<a href="tel:+966112345678" class="call-float" aria-label="Call us">
+  <i class="fas fa-phone-alt"></i>
+</a>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+  <div id="formSuccessToast" class="toast" role="alert" data-bs-autohide="true" data-bs-delay="4000">
+    <div class="toast-header bg-success text-white">
+      <i class="fas fa-check-circle me-2"></i>
+      <strong class="me-auto">Success</strong>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body">Message sent! We'll respond soon.</div>
+  </div>
+</div>

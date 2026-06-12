@@ -1,0 +1,8 @@
+reservation.html:519 Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')
+    at reservation.html:519:36
+    at reservation.html:1818:3
+reservation.html:1 Unsafe attempt to load URL file:///C:/Users/MH%20Studios/Desktop/Danah%20Travel/reservation.html from frame with URL file:///C:/Users/MH%20Studios/Desktop/Danah%20Travel/reservation.html. 'file:' URLs are treated as unique security origins.
+
+reservation.html:52 Uncaught ReferenceError: switchLang is not defined
+    at HTMLDivElement.onclick (reservation.html:52:227)
+onclick @ reservation.html:52

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danah | Operations Command Center</title>
+
+  <!-- Local Bootstrap 5 (matches project structure) -->
+  <link rel="stylesheet" href="/assets/libs/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Shared Danah CSS (fonts, vars, base, admin-base) -->
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+
+  </style>
+</head>
+<body class="admin-body" data-theme="light">
+
+<!-- ============================================================  CUSTOM CURSOR -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ============================================================  COMMAND PALETTE -->
+<div class="cmdpal-backdrop" id="cmdpal">
+  <div class="cmdpal">
+    <div class="cmdpal-search">
+      <i class="fas fa-search" style="color:var(--text-muted);"></i>
+      <input type="text" id="cmdpal-input" placeholder="Search bookings, clients, PNR, visa ID…" autocomplete="off">
+      <kbd class="kbd">ESC</kbd>
+    </div>
+    <div class="cmdpal-results" id="cmdpal-results">
+      <div style="padding:8px 12px;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">Quick Actions</div>
+      <div class="cp-result"><i class="fas fa-plus-circle"></i> New Manual Booking <span class="cp-shortcut">⌘ N</span></div>
+      <div class="cp-result"><i class="fas fa-passport"></i> Process Visa Application</div>
+      <div class="cp-result"><i class="fas fa-user-plus"></i> Register New Client</div>
+      <div class="cp-result"><i class="fas fa-file-export"></i> Export Report <span class="cp-shortcut">⌘ E</span></div>
+      <div class="cp-result"><i class="fas fa-headset"></i> Open Support Ticket</div>
+      <hr class="sep-line my-1">
+      <div style="padding:8px 12px;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);">Recent Bookings</div>
+      <div class="cp-result"><i class="fas fa-ticket-alt"></i><span>#DN-8832 — Faisal Al-Dosari · RUH→LHR</span><span class="cp-shortcut" style="color:var(--amber);">Pending</span></div>
+      <div class="cp-result"><i class="fas fa-ticket-alt"></i><span>#DN-8831 — Maha Al-Otaibi · Schengen Visa</span><span class="cp-shortcut" style="color:var(--red);">Urgent</span></div>
+      <div class="cp-result"><i class="fas fa-ticket-alt"></i><span>#DN-8830 — Ahmed Al-Qahtani · RUH→DXB</span><span class="cp-shortcut" style="color:var(--green);">Complete</span></div>
+    </div>
+    <div class="cmdpal-footer">
+      <span><code>↑↓</code> Navigate</span>
+      <span><code>↵</code> Open</span>
+      <span><code>ESC</code> Close</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================  TOAST CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ============================================================  SIDEBAR -->
+<aside class="admin-sidebar" id="sidebar">
+  <!-- Brand -->
+  <div class="admin-brand" style="height:70px;padding:0 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);flex-shrink:0;">
+    <div class="brand-icon">D</div>
+    <div class="logo-texts" style="flex:1;min-width:0;">
+      <div class="logo-name" style="color:var(--text-h);">DAN<em style="color:var(--blue);">AH</em></div>
+      <div class="logo-sub" style="color:var(--text-muted);font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;">Operations Command</div>
+    </div>
+    <button class="sidebar-toggle" id="sidebar-toggle" title="Collapse sidebar">
+      <i class="fas fa-chevron-left" id="toggle-icon"></i>
+    </button>
+  </div>
+
+  <!-- Nav -->
+  <div style="flex:1;overflow-y:auto;padding:14px 10px;">
+    <div class="sidebar-group" style="padding:0 0 12px;">
+      <div class="sidebar-label" style="padding:6px 8px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);">Operations</div>
+      <nav class="dash-nav">
+        <a href="#" class="dash-link active">
+          <i class="fas fa-chart-pie"></i>
+          <span class="link-text">Command Center</span>
+        </a>
+        <a href="#" class="dash-link" id="nav-bookings">
+          <i class="fas fa-ticket-alt"></i>
+          <span class="link-text">Bookings Queue</span>
+          <span class="badge bg-danger ms-auto rounded-pill badge" style="font-size:.6rem;padding:3px 7px;">12</span>
+        </a>
+        <a href="#" class="dash-link" id="nav-visas">
+          <i class="fas fa-passport"></i>
+          <span class="link-text">Visa Processing</span>
+          <span class="badge ms-auto rounded-pill" style="background:var(--amber);color:#fff;font-size:.6rem;padding:3px 7px;">4</span>
+        </a>
+        <a href="#" class="dash-link" id="nav-clients">
+          <i class="fas fa-users"></i>
+          <span class="link-text">Client CRM</span>
+        </a>
+        <a href="#" class="dash-link">
+          <i class="fas fa-route"></i>
+          <span class="link-text">Flight Routes</span>
+        </a>
+      </nav>
+    </div>
+    <div class="sidebar-group" style="padding:0 0 12px;">
+      <div class="sidebar-label" style="padding:6px 8px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);">Analytics</div>
+      <nav class="dash-nav">
+        <a href="#" class="dash-link">
+          <i class="fas fa-chart-line"></i>
+          <span class="link-text">Revenue Reports</span>
+        </a>
+        <a href="#" class="dash-link">
+          <i class="fas fa-star"></i>
+          <span class="link-text">Performance</span>
+        </a>
+      </nav>
+    </div>
+    <div class="sidebar-group" style="padding:0 0 12px;">
+      <div class="sidebar-label" style="padding:6px 8px;font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);">System</div>
+      <nav class="dash-nav">
+        <a href="#" class="dash-link">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <span class="link-text">Finance & Payouts</span>
+        </a>
+        <a href="#" class="dash-link">
+          <i class="fas fa-user-tie"></i>
+          <span class="link-text">Agent Roles</span>
+        </a>
+        <a href="#" class="dash-link">
+          <i class="fas fa-sliders-h"></i>
+          <span class="link-text">Platform Settings</span>
+        </a>
+        <a href="/" class="dash-link">
+          <i class="fas fa-globe"></i>
+          <span class="link-text">View Public Site</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- User profile -->
+  <div style="padding:14px;border-top:1px solid var(--border);flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="showToast('info','Session Info','Logged in as System Administrator since 08:30 AM')">
+      <div class="u-avatar">SA</div>
+      <div class="u-info" style="flex:1;min-width:0;overflow:hidden;">
+        <div style="font-size:.845rem;font-weight:700;color:var(--text-h);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">System Admin</div>
+        <div style="font-size:.7rem;color:var(--text-muted);">admin@danahtravel.sa</div>
+      </div>
+      <div style="font-size:.7rem;color:var(--red);font-weight:700;cursor:pointer;flex-shrink:0;white-space:nowrap;" class="u-info" onclick="event.stopPropagation();adminLogout()">Sign Out</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================  MAIN AREA -->
+<div class="admin-main" id="main-area">
+
+  <!-- HEADER -->
+  <header class="admin-header" style="position:sticky;top:0;z-index:100;">
+    <!-- Left: hamburger (mobile) + search -->
+    <div style="display:flex;align-items:center;gap:12px;flex:1;">
+      <button class="notif-btn d-xl-none" id="mob-sidebar-toggle" style="flex-shrink:0;"><i class="fas fa-bars"></i></button>
+      <div class="search-bar" onclick="openCmdPal()" style="cursor:pointer;">
+        <i class="fas fa-search" style="color:var(--text-muted);font-size:.8rem;"></i>
+        <input type="text" placeholder="Search or ⌘K for commands…" readonly style="cursor:pointer;">
+        <span class="kbd">⌘K</span>
+      </div>
+    </div>
+
+    <!-- Right: clock + actions -->
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <div class="live-clock" id="live-clock">
+        <div class="live-dot"></div>
+        <span id="clock-display">—</span>
+      </div>
+
+      <!-- Notification bell -->
+      <div style="position:relative;">
+        <button class="notif-btn" id="notif-btn" onclick="toggleNotif()">
+          <i class="fas fa-bell"></i>
+          <div class="notif-badge">3</div>
+        </button>
+        <!-- Notifications dropdown -->
+        <div class="notif-dropdown" id="notif-dropdown">
+          <div style="padding:14px 18px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:.9rem;font-weight:700;color:var(--text-h);">Notifications</span>
+            <span style="font-size:.72rem;color:var(--blue);cursor:pointer;font-weight:600;">Mark all read</span>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(239,68,68,.1);color:var(--red);">
+              <i class="fas fa-triangle-exclamation"></i>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:.845rem;font-weight:700;color:var(--text-h);">Visa Urgent: Maha Al-Otaibi</div>
+              <div style="font-size:.75rem;color:var(--text-muted);margin-top:2px;">Schengen visa deadline in 48 hours — action required</div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">2 minutes ago</div>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:var(--blue-light);color:var(--blue);">
+              <i class="fas fa-ticket-alt"></i>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:.845rem;font-weight:700;color:var(--text-h);">New booking #DN-8834</div>
+              <div style="font-size:.75rem;color:var(--text-muted);margin-top:2px;">Group tour to Istanbul · 6 pax · SAR 8,400</div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">18 minutes ago</div>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(16,185,129,.1);color:var(--green);">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:.845rem;font-weight:700;color:var(--text-h);">Payment confirmed #DN-8829</div>
+              <div style="font-size:.75rem;color:var(--text-muted);margin-top:2px;">SAR 4,200 cleared via mada</div>
+              <div style="font-size:.7rem;color:var(--text-muted);margin-top:4px;">1 hour ago</div>
+            </div>
+          </div>
+          <div style="padding:10px 18px;text-align:center;border-top:1px solid var(--border);">
+            <span style="font-size:.775rem;color:var(--blue);cursor:pointer;font-weight:600;">View all notifications →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme toggle -->
+      <button class="notif-btn" id="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- CANVAS -->
+  <main class="admin-canvas">
+
+    <!-- Page header -->
+    <div class="page-head">
+      <div>
+        <div class="breadcrumb">
+          <span>Danah</span><span class="sep">/</span>
+          <span>Admin</span><span class="sep">/</span>
+          <span class="current">Command Center</span>
+        </div>
+        <h1>Command Center</h1>
+        <div style="font-size:.8rem;color:var(--text-muted);">Live operational snapshot — <span id="live-date">June 10, 2026</span></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn-outline" style="padding:8px 16px;font-size:.8rem;" onclick="showToast('info','Exporting…','Preparing full report for download.')">
+          <i class="fas fa-download"></i> Export Report
+        </button>
+        <button class="btn-blue" style="padding:8px 16px;font-size:.8rem;" onclick="showToast('success','Booking Form Opened','Manual booking form is ready.')">
+          <i class="fas fa-plus"></i> Manual Booking
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================================ KPI CARDS -->
+    <div class="row g-3 mb-4">
+      <div class="col-xl-3 col-sm-6">
+        <div class="kpi-card k-green">
+          <div class="kpi-label">Revenue Today</div>
+          <div class="kpi-value" id="kpi-rev">SAR 0</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="kpi-trend up"><i class="fas fa-arrow-trend-up"></i> +14.2%</span>
+            <span class="kpi-sub">vs. yesterday (SAR 37,210)</span>
+          </div>
+          <div class="kpi-sparkline">
+            <canvas id="spark-rev" height="42"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6">
+        <div class="kpi-card k-amber">
+          <div class="kpi-label">Pending Bookings</div>
+          <div class="kpi-value" id="kpi-book">0</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="kpi-trend warn"><i class="fas fa-hourglass-half"></i> Awaiting issuance</span>
+          </div>
+          <div class="kpi-sub">34 total bookings today</div>
+          <div class="kpi-sparkline">
+            <canvas id="spark-book" height="42"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6">
+        <div class="kpi-card k-red">
+          <div class="kpi-label">Visa Queue</div>
+          <div class="kpi-value" id="kpi-visa">0</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="kpi-trend down"><i class="fas fa-triangle-exclamation"></i> 4 require action</span>
+          </div>
+          <div class="kpi-sub">8 applications in total pipeline</div>
+          <div class="kpi-sparkline">
+            <canvas id="spark-visa" height="42"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-sm-6">
+        <div class="kpi-card k-blue">
+          <div class="kpi-label">Active Clients</div>
+          <div class="kpi-value" id="kpi-clients">0</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="kpi-trend up"><i class="fas fa-user-plus"></i> +3 today</span>
+          </div>
+          <div class="kpi-sub">+18% growth this month</div>
+          <div class="kpi-sparkline">
+            <canvas id="spark-clients" height="42"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================ CHARTS ROW -->
+    <div class="row g-3 mb-4">
+      <!-- Revenue trend -->
+      <div class="col-xl-8 col-12">
+        <div class="chart-card">
+          <div class="chart-head">
+            <div>
+              <div class="chart-title">Revenue Trend</div>
+              <div class="chart-sub" id="rev-range">Last 14 days · SAR 580,240 total</div>
+            </div>
+            <div class="chart-period">
+              <button class="cp-btn on" onclick="setRevPeriod(this,'7d')">7D</button>
+              <button class="cp-btn" onclick="setRevPeriod(this,'14d')">14D</button>
+              <button class="cp-btn" onclick="setRevPeriod(this,'30d')">30D</button>
+            </div>
+          </div>
+          <canvas id="chart-revenue" height="140"></canvas>
+        </div>
+      </div>
+      <!-- Booking distribution -->
+      <div class="col-xl-4 col-12">
+        <div class="chart-card" style="height:100%;display:flex;flex-direction:column;">
+          <div class="chart-head">
+            <div>
+              <div class="chart-title">Bookings by Type</div>
+              <div class="chart-sub">Current month · 142 bookings</div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+            <div style="width:160px;height:160px;flex-shrink:0;">
+              <canvas id="chart-types"></canvas>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div class="legend-item"><div class="legend-dot" style="background:#3B82F6;"></div>Flights <strong style="margin-left:4px;">40%</strong></div>
+              <div class="legend-item"><div class="legend-dot" style="background:#10B981;"></div>Visa Services <strong style="margin-left:4px;">25%</strong></div>
+              <div class="legend-item"><div class="legend-dot" style="background:#F59E0B;"></div>Hotel Booking <strong style="margin-left:4px;">15%</strong></div>
+              <div class="legend-item"><div class="legend-dot" style="background:#8B5CF6;"></div>Tour Packages <strong style="margin-left:4px;">15%</strong></div>
+              <div class="legend-item"><div class="legend-dot" style="background:#EC4899;"></div>Corporate <strong style="margin-left:4px;">5%</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================ OPERATIONS ROW -->
+    <div class="row g-3 mb-4">
+      <!-- Booking queue table -->
+      <div class="col-xl-8 col-12">
+        <div class="ops-card">
+          <div class="ops-head">
+            <div class="tab-strip" id="booking-tabs">
+              <button class="t-tab on" onclick="switchTab(this,'all')">All <span class="t-count">34</span></button>
+              <button class="t-tab" onclick="switchTab(this,'pending')">Pending <span class="t-count" style="background:rgba(245,158,11,.1);color:var(--amber);">12</span></button>
+              <button class="t-tab" onclick="switchTab(this,'urgent')">Urgent <span class="t-count" style="background:rgba(239,68,68,.1);color:var(--red);">4</span></button>
+              <button class="t-tab" onclick="switchTab(this,'complete')">Complete <span class="t-count" style="background:rgba(16,185,129,.1);color:var(--green);">18</span></button>
+            </div>
+            <div class="filter-bar">
+              <select class="filter-select">
+                <option>All Types</option>
+                <option>Flight</option>
+                <option>Visa</option>
+                <option>Hotel</option>
+                <option>Package</option>
+              </select>
+              <button class="notif-btn" style="font-size:.75rem;" title="Refresh" onclick="showToast('success','Queue Refreshed','Booking data updated.')"><i class="fas fa-rotate"></i></button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table-admin">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" style="accent-color:var(--blue);"></th>
+                  <th>Booking ID</th>
+                  <th>Client</th>
+                  <th>Route / Service</th>
+                  <th>Amount</th>
+                  <th>Agent</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="booking-table-body">
+                <tr>
+                  <td><input type="checkbox" style="accent-color:var(--blue);"></td>
+                  <td><strong style="color:var(--text-h);font-size:.85rem;">#DN-8834</strong></td>
+                  <td class="client-cell"><div class="name">Turki Al-Malik</div><div class="email">turki@company.sa</div></td>
+                  <td class="route-cell">Group Tour · Istanbul<div class="rtype"><i class="fas fa-users" style="color:var(--blue);"></i> 6 pax · Package</div></td>
+                  <td class="amt-cell"><span class="cur">SAR</span> 8,400</td>
+                  <td><div class="agent-chip"><div class="dot"></div>Omar A.</div></td>
+                  <td><span class="status-badge warn">Pending</span></td>
+                  <td style="font-size:.78rem;color:var(--text-muted);">Now</td>
+                  <td><div class="row-actions"><button class="ra-btn view" title="View"><i class="fas fa-eye"></i></button><button class="ra-btn approve" title="Approve"><i class="fas fa-check"></i></button><button class="ra-btn delete" title="Cancel"><i class="fas fa-xmark"></i></button></div></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="accent-color:var(--blue);"></td>
+                  <td><strong style="color:var(--text-h);font-size:.85rem;">#DN-8833</strong></td>
+                  <td class="client-cell"><div class="name">Hessa Al-Rashidi</div><div class="email">hessa.r@email.com</div></td>
+                  <td class="route-cell">RUH → LHR<div class="rtype"><i class="fas fa-plane" style="color:var(--blue);"></i> 2 pax · Business Class</div></td>
+                  <td class="amt-cell"><span class="cur">SAR</span> 6,800</td>
+                  <td><div class="agent-chip"><div class="dot"></div>Khalid A.</div></td>
+                  <td><span class="status-badge blue">Processing</span></td>
+                  <td style="font-size:.78rem;color:var(--text-muted);">42m ago</td>
+                  <td><div class="row-actions"><button class="ra-btn view"><i class="fas fa-eye"></i></button><button class="ra-btn approve"><i class="fas fa-check"></i></button><button class="ra-btn delete"><i class="fas fa-xmark"></i></button></div></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="accent-color:var(--blue);"></td>
+                  <td><strong style="color:var(--text-h);font-size:.85rem;">#DN-8832</strong></td>
+                  <td class="client-cell"><div class="name">Faisal Al-Dosari</div><div class="email">faisal@danahtravel.sa</div></td>
+                  <td class="route-cell">RUH → LHR<div class="rtype"><i class="fas fa-plane" style="color:var(--blue);"></i> 1 pax · Economy</div></td>
+                  <td class="amt-cell"><span class="cur">SAR</span> 4,250</td>
+                  <td><div class="agent-chip"><div class="dot"></div>Khalid A.</div></td>
+                  <td><span class="status-badge warn">Pending Issuance</span></td>
+                  <td style="font-size:.78rem;color:var(--text-muted);">1h ago</td>
+                  <td><div class="row-actions"><button class="ra-btn view"><i class="fas fa-eye"></i></button><button class="ra-btn approve"><i class="fas fa-check"></i></button><button class="ra-btn delete"><i class="fas fa-xmark"></i></button></div></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="accent-color:var(--blue);"></td>
+                  <td><strong style="color:var(--text-h);font-size:.85rem;">#DN-8831</strong></td>
+                  <td class="client-cell"><div class="name">Maha Al-Otaibi</div><div class="email">maha.o@danahtravel.sa</div></td>
+                  <td class="route-cell">Schengen Visa · France<div class="rtype"><i class="fas fa-passport" style="color:var(--green);"></i> Tourist · 15 days</div></td>
+                  <td class="amt-cell"><span class="cur">SAR</span> 850</td>
+                  <td><div class="agent-chip"><div class="dot" style="background:var(--red);"></div>Nora S.</div></td>
+                  <td><span class="status-badge danger">Action Required</span></td>
+                  <td style="font-size:.78rem;color:var(--text-muted);">Yesterday</td>
+                  <td><div class="row-actions"><button class="ra-btn view"><i class="fas fa-eye"></i></button><button class="ra-btn approve"><i class="fas fa-check"></i></button><button class="ra-btn delete"><i class="fas fa-xmark"></i></button></div></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="accent-color:var(--blue);"></td>
+                  <td><strong style="color:var(--text-h);font-size:.85rem;">#DN-8830</strong></td>
+                  <td class="client-cell"><div class="name">Ahmed Al-Qahtani</div><div class="email">a.qahtani@corp.sa</div></td>
+                  <td class="route-cell">RUH → DXB<div class="rtype"><i class="fas fa-plane" style="color:var(--blue);"></i> 1 pax · Economy</div></td>
+                  <td class="amt-cell"><span class="cur">SAR</span> 490</td>
+                  <td><div class="agent-chip"><div class="dot"></div>Sarah R.</div></td>
+                  <td><span class="status-badge good">Issued</span></td>
+                  <td style="font-size:.78rem;color:var(--text-muted);">Yesterday</td>
+                  <td><div class="row-actions"><button class="ra-btn view"><i class="fas fa-eye"></i></button><button class="ra-btn approve"><i class="fas fa-check"></i></button><button class="ra-btn delete"><i class="fas fa-xmark"></i></button></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-pagination">
+            <span>Showing 1–5 of 34 bookings</span>
+            <div class="pag-btns">
+              <button class="pag-btn"><i class="fas fa-chevron-left"></i></button>
+              <button class="pag-btn on">1</button>
+              <button class="pag-btn">2</button>
+              <button class="pag-btn">3</button>
+              <button class="pag-btn">…</button>
+              <button class="pag-btn">7</button>
+              <button class="pag-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick actions + Activity feed -->
+      <div class="col-xl-4 col-12">
+        <!-- Quick actions -->
+        <div class="qact-card">
+          <div class="qact-title"><i class="fas fa-bolt text-primary me-2"></i>Quick Actions</div>
+          <div class="qa-grid">
+            <button class="qa-btn" onclick="showToast('info','Opening…','Manual booking form loaded.')"><i class="fas fa-plus-circle"></i>New Booking</button>
+            <button class="qa-btn" onclick="showToast('info','Opening…','Visa processing form loaded.')"><i class="fas fa-passport"></i>Process Visa</button>
+            <button class="qa-btn" onclick="showToast('info','Opening…','Client registration form loaded.')"><i class="fas fa-user-plus"></i>Add Client</button>
+            <button class="qa-btn" onclick="showToast('success','Exported','Report download starting…')"><i class="fas fa-file-export"></i>Export PDF</button>
+            <button class="qa-btn" onclick="showToast('info','Flight Check','Checking live flight data…')"><i class="fas fa-plane"></i>Check Flights</button>
+            <button class="qa-btn" onclick="openCmdPal()"><i class="fas fa-search"></i>Command ⌘K</button>
+          </div>
+        </div>
+
+        <!-- Activity feed -->
+        <div class="qact-card" style="margin-bottom:0;">
+          <div class="qact-title"><i class="fas fa-bolt text-primary me-2"></i>Live Activity</div>
+          <div id="activity-feed">
+            <div class="feed-item">
+              <div class="feed-icon" style="background:var(--blue-light);color:var(--blue);"><i class="fas fa-ticket-alt"></i></div>
+              <div><div class="feed-msg"><strong>New booking #DN-8834</strong> submitted — Turki Al-Malik</div><div class="feed-time">Just now</div></div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-icon" style="background:rgba(16,185,129,.1);color:var(--green);"><i class="fas fa-check-circle"></i></div>
+              <div><div class="feed-msg"><strong>#DN-8829</strong> payment confirmed — SAR 4,200</div><div class="feed-time">1 hour ago</div></div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-icon" style="background:rgba(139,92,246,.1);color:#7C3AED;"><i class="fas fa-passport"></i></div>
+              <div><div class="feed-msg">Visa approved — <strong>Abdullah Al-Harbi</strong> · UK Tourist</div><div class="feed-time">2 hours ago</div></div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-icon" style="background:rgba(245,158,11,.1);color:var(--amber);"><i class="fas fa-user-plus"></i></div>
+              <div><div class="feed-msg">New client registered — <strong>Reem Al-Shamrani</strong></div><div class="feed-time">3 hours ago</div></div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-icon" style="background:rgba(239,68,68,.1);color:var(--red);"><i class="fas fa-triangle-exclamation"></i></div>
+              <div><div class="feed-msg"><strong>#DN-8828</strong> flagged — missing passport copy</div><div class="feed-time">5 hours ago</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================ BOTTOM ROW -->
+    <div class="row g-3">
+      <!-- Visa pipeline -->
+      <div class="col-xl-4 col-12">
+        <div class="pipeline-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <div>
+              <div class="section-head">Visa Pipeline</div>
+              <div class="section-sub">Current processing stages</div>
+            </div>
+            <span class="status-badge warn" style="font-size:.65rem;">8 Active</span>
+          </div>
+          <div class="pipeline-stage">
+            <div class="ps-icon" style="background:rgba(148,163,184,.1);color:var(--text-muted);"><i class="fas fa-paper-plane"></i></div>
+            <div class="ps-info">
+              <div class="ps-name">Applications Submitted</div>
+              <div class="ps-count">Today's new intake</div>
+              <div class="ps-bar-bg"><div class="ps-bar" style="width:30%;background:var(--text-muted);"></div></div>
+            </div>
+            <div class="ps-num">3</div>
+          </div>
+          <div class="pipeline-stage">
+            <div class="ps-icon" style="background:var(--blue-light);color:var(--blue);"><i class="fas fa-magnifying-glass"></i></div>
+            <div class="ps-info">
+              <div class="ps-name">Document Review</div>
+              <div class="ps-count">Verifying documentation</div>
+              <div class="ps-bar-bg"><div class="ps-bar" style="width:50%;background:var(--blue);"></div></div>
+            </div>
+            <div class="ps-num">5</div>
+          </div>
+          <div class="pipeline-stage">
+            <div class="ps-icon" style="background:rgba(245,158,11,.1);color:var(--amber);"><i class="fas fa-building"></i></div>
+            <div class="ps-info">
+              <div class="ps-name">Embassy Submission</div>
+              <div class="ps-count">Awaiting embassy decision</div>
+              <div class="ps-bar-bg"><div class="ps-bar" style="width:80%;background:var(--amber);"></div></div>
+            </div>
+            <div class="ps-num">8</div>
+          </div>
+          <div class="pipeline-stage">
+            <div class="ps-icon" style="background:rgba(16,185,129,.1);color:var(--green);"><i class="fas fa-check-circle"></i></div>
+            <div class="ps-info">
+              <div class="ps-name">Approved (This Month)</div>
+              <div class="ps-count">Success rate: 98.4%</div>
+              <div class="ps-bar-bg"><div class="ps-bar" style="width:95%;background:var(--green);"></div></div>
+            </div>
+            <div class="ps-num" style="color:var(--green);">45</div>
+          </div>
+          <div class="pipeline-stage">
+            <div class="ps-icon" style="background:rgba(239,68,68,.1);color:var(--red);"><i class="fas fa-xmark-circle"></i></div>
+            <div class="ps-info">
+              <div class="ps-name">Rejected / Resubmit</div>
+              <div class="ps-count">Under appeal</div>
+              <div class="ps-bar-bg"><div class="ps-bar" style="width:10%;background:var(--red);"></div></div>
+            </div>
+            <div class="ps-num" style="color:var(--red);">2</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent performance -->
+      <div class="col-xl-8 col-12">
+        <div class="agent-card">
+          <div style="padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div class="section-head">Agent Performance</div>
+              <div class="section-sub">June 2026 · ranked by revenue generated</div>
+            </div>
+            <div class="chart-period">
+              <button class="cp-btn on">Month</button>
+              <button class="cp-btn">Quarter</button>
+              <button class="cp-btn">Year</button>
+            </div>
+          </div>
+
+          <div class="agent-row">
+            <div class="agent-rank gold">1</div>
+            <div class="ag-avatar">SR</div>
+            <div style="flex:1;min-width:0;">
+              <div class="ag-name">Sarah Al-Rashid</div>
+              <div class="ag-role">General Director</div>
+              <div class="ag-bar-wrap" style="margin-top:6px;">
+                <div class="ag-bar-bg"><div class="ag-bar" style="width:100%;background:linear-gradient(90deg,var(--blue),#60A5FA);"></div></div>
+              </div>
+            </div>
+            <div class="ag-stat">
+              <div class="ag-revenue">SAR 182K</div>
+              <div class="ag-bookings">34 bookings</div>
+            </div>
+          </div>
+          <div class="agent-row">
+            <div class="agent-rank silver">2</div>
+            <div class="ag-avatar">KO</div>
+            <div style="flex:1;min-width:0;">
+              <div class="ag-name">Khalid Al-Otaibi</div>
+              <div class="ag-role">Head of Operations</div>
+              <div class="ag-bar-wrap" style="margin-top:6px;">
+                <div class="ag-bar-bg"><div class="ag-bar" style="width:78%;background:linear-gradient(90deg,var(--blue),#60A5FA);"></div></div>
+              </div>
+            </div>
+            <div class="ag-stat">
+              <div class="ag-revenue">SAR 141K</div>
+              <div class="ag-bookings">28 bookings</div>
+            </div>
+          </div>
+          <div class="agent-row">
+            <div class="agent-rank bronze">3</div>
+            <div class="ag-avatar" style="background:rgba(139,92,246,.1);color:#7C3AED;">OZ</div>
+            <div style="flex:1;min-width:0;">
+              <div class="ag-name">Omar Al-Zahrani</div>
+              <div class="ag-role">Tour Coordinator</div>
+              <div class="ag-bar-wrap" style="margin-top:6px;">
+                <div class="ag-bar-bg"><div class="ag-bar" style="width:56%;background:linear-gradient(90deg,#8B5CF6,#C4B5FD);"></div></div>
+              </div>
+            </div>
+            <div class="ag-stat">
+              <div class="ag-revenue">SAR 102K</div>
+              <div class="ag-bookings">22 bookings</div>
+            </div>
+          </div>
+          <div class="agent-row">
+            <div class="agent-rank normal">4</div>
+            <div class="ag-avatar" style="background:rgba(16,185,129,.1);color:var(--green);">NS</div>
+            <div style="flex:1;min-width:0;">
+              <div class="ag-name">Nora Al-Shamrani</div>
+              <div class="ag-role">Visa Specialist</div>
+              <div class="ag-bar-wrap" style="margin-top:6px;">
+                <div class="ag-bar-bg"><div class="ag-bar" style="width:38%;background:linear-gradient(90deg,var(--green),#6EE7B7);"></div></div>
+              </div>
+            </div>
+            <div class="ag-stat">
+              <div class="ag-revenue">SAR 69K</div>
+              <div class="ag-bookings">51 visas</div>
+            </div>
+          </div>
+          <div class="agent-row">
+            <div class="agent-rank normal">5</div>
+            <div class="ag-avatar" style="background:rgba(245,158,11,.1);color:var(--amber);">YM</div>
+            <div style="flex:1;min-width:0;">
+              <div class="ag-name">Yusuf Al-Mutairi</div>
+              <div class="ag-role">Junior Consultant</div>
+              <div class="ag-bar-wrap" style="margin-top:6px;">
+                <div class="ag-bar-bg"><div class="ag-bar" style="width:22%;background:linear-gradient(90deg,var(--amber),#FCD34D);"></div></div>
+              </div>
+            </div>
+            <div class="ag-stat">
+              <div class="ag-revenue">SAR 40K</div>
+              <div class="ag-bookings">14 bookings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom spacing -->
+    <div style="height:32px;"></div>
+
+  </main><!-- /admin-canvas -->
+</div><!-- /admin-main -->
+
+<!-- Local jQuery + Bootstrap -->
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ============================================================
+   DANAH ADMIN DASHBOARD — core.js (inlined)
+   v2.0 — Command Center
+============================================================ */
+
+/* ---- CURSOR ---- */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  dot.style.left  = e.clientX + 'px';
+  dot.style.top   = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top  = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,[role="button"],.qa-btn,.agent-row,.cp-result,.dash-link,.pag-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.classList.add('grow'); ring.classList.add('grow'); });
+  el.addEventListener('mouseleave', () => { dot.classList.remove('grow'); ring.classList.remove('grow'); });
+});
+
+/* ---- SIDEBAR COLLAPSE ---- */
+const sidebar    = document.getElementById('sidebar');
+const mainArea   = document.getElementById('main-area');
+const toggleBtn  = document.getElementById('sidebar-toggle');
+const toggleIcon = document.getElementById('toggle-icon');
+let sidebarOpen  = true;
+
+toggleBtn.addEventListener('click', () => {
+  sidebarOpen = !sidebarOpen;
+  sidebar.classList.toggle('collapsed', !sidebarOpen);
+  mainArea.classList.toggle('expanded', !sidebarOpen);
+  toggleIcon.className = sidebarOpen ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+});
+
+/* Mobile sidebar */
+const mobToggle = document.getElementById('mob-sidebar-toggle');
+if (mobToggle) {
+  mobToggle.addEventListener('click', () => sidebar.classList.toggle('mob-open'));
+}
+
+/* ---- LIVE CLOCK ---- */
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock-display').textContent = now.toLocaleTimeString('en-SA', {
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+  });
+  document.getElementById('live-date').textContent = now.toLocaleDateString('en-SA', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+/* ---- THEME TOGGLE ---- */
+let isDark = false;
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+  updateChartTheme();
+}
+
+/* ---- NOTIFICATIONS DROPDOWN ---- */
+const notifDropdown = document.getElementById('notif-dropdown');
+function toggleNotif() {
+  notifDropdown.classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('#notif-btn') && !e.target.closest('#notif-dropdown')) {
+    notifDropdown.classList.remove('open');
+  }
+});
+
+/* ---- NAV ACTIVE LINKS ---- */
+document.querySelectorAll('.dash-link').forEach(link => {
+  link.addEventListener('click', e => {
+    if (link.getAttribute('href') === '/') return;
+    e.preventDefault();
+    document.querySelectorAll('.dash-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+/* ---- TABS ---- */
+function switchTab(btn, type) {
+  document.querySelectorAll('#booking-tabs .t-tab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  showToast('info', 'Filter applied', `Showing ${type === 'all' ? 'all' : type} bookings`);
+}
+
+/* ---- COMMAND PALETTE ---- */
+const cmdpalBackdrop = document.getElementById('cmdpal');
+const cmdpalInput    = document.getElementById('cmdpal-input');
+
+function openCmdPal() {
+  cmdpalBackdrop.classList.add('open');
+  setTimeout(() => cmdpalInput.focus(), 120);
+}
+function closeCmdPal() { cmdpalBackdrop.classList.remove('open'); }
+
+cmdpalBackdrop.addEventListener('click', e => { if (e.target === cmdpalBackdrop) closeCmdPal(); });
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openCmdPal(); }
+  if (e.key === 'Escape') { closeCmdPal(); notifDropdown.classList.remove('open'); }
+});
+
+/* Keyboard nav in command palette */
+let cpFocusIdx = -1;
+cmdpalInput.addEventListener('keydown', e => {
+  const items = document.querySelectorAll('.cp-result');
+  if (e.key === 'ArrowDown') { cpFocusIdx = Math.min(cpFocusIdx + 1, items.length - 1); }
+  else if (e.key === 'ArrowUp') { cpFocusIdx = Math.max(cpFocusIdx - 1, 0); }
+  else if (e.key === 'Enter' && cpFocusIdx >= 0) {
+    closeCmdPal();
+    showToast('success', 'Action triggered', items[cpFocusIdx].textContent.trim().slice(0, 50));
+    cpFocusIdx = -1;
+  }
+  items.forEach((item, i) => item.classList.toggle('focused', i === cpFocusIdx));
+});
+
+/* ---- TOAST NOTIFICATIONS ---- */
+const toastContainer = document.getElementById('toast-container');
+const toastIcons = { success: 'fa-check-circle', warn: 'fa-triangle-exclamation', error: 'fa-xmark-circle', info: 'fa-circle-info' };
+
+function showToast(type, title, message, duration = 4000) {
+  const toast = document.createElement('div');
+  toast.className = 'toast-item';
+  toast.innerHTML = `
+    <div class="toast-icon ${type}"><i class="fas ${toastIcons[type]}"></i></div>
+    <div style="flex:1;min-width:0;">
+      <div class="toast-title">${title}</div>
+      <div class="toast-msg">${message}</div>
+    </div>
+    <button class="toast-close" onclick="dismissToast(this.closest('.toast-item'))"><i class="fas fa-times"></i></button>
+  `;
+  toastContainer.prepend(toast);
+  setTimeout(() => dismissToast(toast), duration);
+}
+function dismissToast(toast) {
+  if (!toast || !toast.isConnected) return;
+  toast.classList.add('out');
+  setTimeout(() => toast.remove(), 380);
+}
+
+/* ---- ANIMATED KPI COUNTERS ---- */
+function animateCounter(el, target, prefix = '', suffix = '', decimals = 0) {
+  const dur = 1400;
+  const fps = 60;
+  const step = target / (dur / (1000 / fps));
+  let cur = 0;
+  const timer = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = prefix + (decimals ? cur.toFixed(decimals) : Math.round(cur).toLocaleString()) + suffix;
+    if (cur >= target) clearInterval(timer);
+  }, 1000 / fps);
+}
+
+const kpiObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    animateCounter(document.getElementById('kpi-rev'),     42500, 'SAR ', '', 0);
+    animateCounter(document.getElementById('kpi-book'),    12,    '',     '', 0);
+    animateCounter(document.getElementById('kpi-visa'),    4,     '',     '', 0);
+    animateCounter(document.getElementById('kpi-clients'), 1240,  '',     '', 0);
+    kpiObserver.disconnect();
+  });
+}, { threshold: 0.3 });
+kpiObserver.observe(document.querySelector('.kpi-card'));
+
+/* ---- SPARKLINE CHARTS ---- */
+function makeSpark(id, data, color) {
+  const ctx = document.getElementById(id);
+  if (!ctx) return;
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: data.map((_, i) => i),
+      datasets: [{ data, borderColor: color, borderWidth: 1.8, fill: true,
+        backgroundColor: Chart.helpers.color
+          ? Chart.helpers.color(color).alpha(0.08).rgbString()
+          : color + '18',
+        tension: 0.45, pointRadius: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      scales: { x: { display: false }, y: { display: false } },
+      animation: { duration: 800 }
+    }
+  });
+}
+
+makeSpark('spark-rev',     [28,34,29,38,42,35,40,38,45,41,47,42,48,43], '#10B981');
+makeSpark('spark-book',    [8, 10, 7, 12, 14, 11, 13, 9, 15, 12, 14, 11, 16, 12], '#F59E0B');
+makeSpark('spark-visa',    [2, 3, 5, 4, 6, 3, 4, 7, 5, 8, 6, 5, 7, 4], '#EF4444');
+makeSpark('spark-clients', [1200,1205,1210,1215,1218,1222,1225,1228,1230,1233,1235,1237,1238,1240], '#3B82F6');
+
+/* ---- REVENUE TREND CHART ---- */
+const revData14 = [38200,42100,35600,47800,52100,41300,55600,43900,48200,39800,50400,44700,51200,42500];
+const revData7  = revData14.slice(-7);
+const revData30 = Array.from({length:30}, (_,i) => 30000 + Math.sin(i * 0.6) * 8000 + Math.random() * 5000);
+const revLabels = ['27 May','28','29','30','31','1 Jun','2','3','4','5','6','7','8','9 Jun','10'];
+
+let revChart;
+function buildRevChart(data, labels) {
+  if (revChart) revChart.destroy();
+  const ctx = document.getElementById('chart-revenue');
+  const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 200);
+  gradient.addColorStop(0,  'rgba(59,130,246,0.18)');
+  gradient.addColorStop(1,  'rgba(59,130,246,0.00)');
+
+  revChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels || Array.from({length: data.length}, (_, i) => `D-${data.length - i}`),
+      datasets: [{
+        label: 'Revenue (SAR)',
+        data,
+        borderColor: '#3B82F6',
+        backgroundColor: gradient,
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.42,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: '#3B82F6',
+        pointHoverBorderColor: '#fff',
+        pointHoverBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'var(--bg-card, #fff)',
+          titleColor: 'var(--text-h, #0F172A)',
+          bodyColor: 'var(--text-p, #475569)',
+          borderColor: 'var(--border, #E2E8F0)',
+          borderWidth: 1,
+          padding: 12,
+          callbacks: { label: ctx => ' SAR ' + ctx.parsed.y.toLocaleString() }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } },
+        y: {
+          grid: { color: 'rgba(148,163,184,0.1)' },
+          ticks: { color: '#94A3B8', font: { size: 11 }, callback: v => 'SAR ' + (v/1000).toFixed(0) + 'K' }
+        }
+      },
+      animation: { duration: 600 }
+    }
+  });
+}
+
+buildRevChart(revData14, revLabels.slice(-14));
+
+function setRevPeriod(btn, period) {
+  document.querySelectorAll('.chart-period .cp-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const data = period === '7d' ? revData7 : period === '30d' ? revData30 : revData14;
+  document.getElementById('rev-range').textContent =
+    `Last ${period === '7d' ? '7' : period === '30d' ? '30' : '14'} days · SAR ${data.reduce((a,b)=>a+b,0).toLocaleString()} total`;
+  buildRevChart(data);
+}
+
+/* ---- BOOKING TYPES DOUGHNUT ---- */
+new Chart(document.getElementById('chart-types'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Flights', 'Visa Services', 'Hotel', 'Tour Packages', 'Corporate'],
+    datasets: [{
+      data: [40, 25, 15, 15, 5],
+      backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899'],
+      borderWidth: 0,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '72%',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => `  ${ctx.label}: ${ctx.parsed}%` }
+      }
+    },
+    animation: { animateRotate: true, duration: 800 }
+  }
+});
+
+/* ---- UPDATE CHART THEME ON TOGGLE ---- */
+function updateChartTheme() {
+  // Chart.js reads CSS vars, minor workaround for text colors
+  Chart.defaults.color = isDark ? '#94A3B8' : '#64748B';
+}
+
+/* ---- ROW ACTIONS ---- */
+document.querySelectorAll('.ra-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const row = btn.closest('tr');
+    const id  = row.querySelector('strong').textContent;
+    if (btn.classList.contains('approve')) showToast('success', 'Booking Approved', `${id} has been approved and queued for issuance.`);
+    if (btn.classList.contains('view'))    showToast('info',    'Opening Booking',  `Loading full details for ${id}…`);
+    if (btn.classList.contains('delete'))  showToast('warn',    'Booking Cancelled', `${id} has been flagged for cancellation review.`);
+  });
+});
+
+/* ---- PAGINATION BUTTONS ---- */
+document.querySelectorAll('.pag-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.querySelector('i')) return;
+    document.querySelectorAll('.pag-btn').forEach(b => { if (!b.querySelector('i')) b.classList.remove('on'); });
+    btn.classList.add('on');
+  });
+});
+
+/* ---- ADMIN LOGOUT ---- */
+function adminLogout() {
+  showToast('warn', 'Session Terminating', 'Logging out of Operations Command Center…');
+  setTimeout(() => { window.location.href = '/'; }, 2000);
+}
+
+/* ---- DEFERRED TOAST SEQUENCE on load ---- */
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => showToast('success', 'Command Center Active', 'All systems operational. Data refreshed at login.'), 800);
+  setTimeout(() => showToast('warn',    'Visa Alert: 4 Urgent', 'Maha Al-Otaibi Schengen deadline in 48hrs — action required.'), 2200);
+  setTimeout(() => showToast('info',    'New Booking Arrived', '#DN-8834 from Turki Al-Malik — SAR 8,400 · Group tour Istanbul.'), 3800);
+});
+
+</script>
+</body>
+</html>

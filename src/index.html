@@ -1,0 +1,882 @@
+---
+layout: base.njk
+title: Danah | For Travel and Tourism — Riyadh, Saudi Arabia
+description: Your gateway to the world. Modern flight ticketing, visa services, and curated tours from the heart of Riyadh.
+pageScript: /assets/js/index-page.js
+includeHomepageScript: true
+---
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero" aria-label="Welcome to Danah Travel" data-i18n-aria-label="hero.aria">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <div class="hero-row">
+      <!-- Left: copy -->
+      <div class="hero-left">
+        <div class="hero-badge reveal">
+          <i class="fas fa-location-dot"></i> <span data-i18n="hero.badge">Downtown Riyadh, Saudi Arabia</span>
+        </div>
+        <h1 class="hero-title reveal d1" data-i18n-html="hero.title">
+          Your Journey<br>Begins with<br><span class="hl">Danah.</span>
+        </h1>
+        <p class="hero-sub reveal d2" data-i18n="hero.sub">
+          A modern travel &amp; tourism agency in the heart of Riyadh —
+          flights, visa services, and curated world tours all under one roof.
+        </p>
+        <div class="hero-btns reveal d3">
+          <a href="#booking" class="btn-blue">
+            <i class="fas fa-paper-plane"></i> <span data-i18n="hero.cta1">Book a Flight</span>
+          </a>
+          <a href="#portfolio" class="btn-ghost">
+            <i class="fas fa-globe"></i> <span data-i18n="hero.cta2">Explore Destinations</span>
+          </a>
+        </div>
+        <div class="hero-stats reveal d4">
+          <div>
+            <div class="h-stat-val">12K+</div>
+            <div class="h-stat-lbl" data-i18n="hero.stat1">Happy Travellers</div>
+          </div>
+          <div>
+            <div class="h-stat-val">85+</div>
+            <div class="h-stat-lbl" data-i18n="hero.stat2">Destinations</div>
+          </div>
+          <div>
+            <div class="h-stat-val">98%</div>
+            <div class="h-stat-lbl" data-i18n="hero.stat3">Visa Approval</div>
+          </div>
+          <div>
+            <div class="h-stat-val">24/7</div>
+            <div class="h-stat-lbl" data-i18n="hero.stat4">Support</div>
+          </div>
+        </div>
+      </div>
+      <!-- Right: floating glass cards -->
+      <div class="hero-cards">
+        <div class="glass-card reveal-right d2">
+          <div class="flight-row">
+            <div class="flight-icon"><i class="fas fa-plane-departure"></i></div>
+            <div>
+              <div class="flight-dest" data-i18n="hero.card1.route">Riyadh → Dubai</div>
+              <div class="flight-sub" data-i18n="hero.card1.flight">Emirates · EK 802</div>
+            </div>
+            <div class="pill-green" data-i18n="hero.card1.status">On Time</div>
+          </div>
+          <div class="flight-meta">
+            <span><i class="fas fa-clock me-1"></i><span data-i18n="hero.card1.time">08:45 AM</span></span>
+            <span><i class="fas fa-hourglass-half me-1"></i><span data-i18n="hero.card1.duration">1h 50m</span></span>
+            <span><i class="fas fa-calendar me-1"></i><span data-i18n="hero.card1.date">Today</span></span>
+          </div>
+        </div>
+        <div class="glass-card reveal-right d3">
+          <div class="visa-label" data-i18n="hero.card2.label">VISA APPROVAL RATE</div>
+          <div class="visa-val">98.4%</div>
+          <div class="visa-bar-bg"><div class="visa-bar-fill"></div></div>
+          <div class="visa-note" data-i18n="hero.card2.note">Based on 3,200+ applications processed</div>
+        </div>
+        <div class="glass-card reveal-right d4" style="display:flex;gap:20px;justify-content:space-around;text-align:center;">
+          <div>
+            <div style="color:#60A5FA;font-family:var(--ff-head);font-size:1.6rem;font-weight:900;line-height:1;">85+</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;font-weight:600;letter-spacing:1px;margin-top:4px;" data-i18n="hero.card3.countries">Countries</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,.12);"></div>
+          <div>
+            <div style="color:#60A5FA;font-family:var(--ff-head);font-size:1.6rem;font-weight:900;line-height:1;">8yr</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;font-weight:600;letter-spacing:1px;margin-top:4px;" data-i18n="hero.card3.experience">Experience</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,.12);"></div>
+          <div>
+            <div style="color:#60A5FA;font-family:var(--ff-head);font-size:1.6rem;font-weight:900;line-height:1;">4.9</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;font-weight:600;letter-spacing:1px;margin-top:4px;" data-i18n="hero.card3.rating">Rating ★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">
+    <span data-i18n="scroll">Scroll</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAR
+============================================================ -->
+<section id="stats" aria-label="Company statistics" data-i18n-aria-label="stats.aria">
+  <div class="container-xl">
+    <div class="stat-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-to="12000" data-sfx="K+">0</div>
+        <div class="stat-lbl" data-i18n="stats.clients">Happy Clients</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-num" data-to="85" data-sfx="+">0</div>
+        <div class="stat-lbl" data-i18n="stats.destinations">Destinations</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-num" data-to="3200" data-sfx="K+">0</div>
+        <div class="stat-lbl" data-i18n="stats.visas">Visas Processed</div>
+      </div>
+      <div class="stat-item reveal d3">
+        <div class="stat-num" data-to="8" data-sfx=" Yrs">0</div>
+        <div class="stat-lbl" data-i18n="stats.experience">Years of Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section id="services" class="section-py bg-2" aria-labelledby="services-h" data-i18n-aria-label="services.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-compass"></i> <span data-i18n="services.tag">What We Offer</span></span>
+      <h2 class="sec-title reveal d1" id="services-h" data-i18n="services.title">End-to-End Travel Services</h2>
+      <p class="sec-sub reveal d2" data-i18n="services.desc">
+        From your first flight booking to every visa detail — Danah delivers
+        seamless travel solutions tailored to every journey and every budget.
+      </p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="serv-card reveal">
+          <div class="icon-box"><i class="fas fa-plane-departure"></i></div>
+          <h4 data-i18n="services.intl.title">International Flights</h4>
+          <p data-i18n="services.intl.desc">Hundreds of global routes, competitive fares, and flexible booking through our premium airline partner network.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="serv-card reveal d1">
+          <div class="icon-box"><i class="fas fa-plane"></i></div>
+          <h4 data-i18n="services.dom.title">Domestic Flights</h4>
+          <p data-i18n="services.dom.desc">Fast, affordable travel between Riyadh, Jeddah, Dammam, Abha, Medina, and all major Saudi destinations.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="serv-card reveal d2">
+          <div class="icon-box"><i class="fas fa-passport"></i></div>
+          <h4 data-i18n="services.visa.title">Visa Services</h4>
+          <p data-i18n="services.visa.desc">Expert visa processing with a 98.4% approval rate. We manage documentation for 60+ countries from start to finish.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="serv-card reveal d3">
+          <div class="icon-box"><i class="fas fa-hotel"></i></div>
+          <h4 data-i18n="services.hotel.title">Hotel Booking</h4>
+          <p data-i18n="services.hotel.desc">Curated hotels from budget-friendly stays to five-star luxury resorts, always at the best available rate.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="serv-card reveal d4">
+          <div class="icon-box"><i class="fas fa-map-marked-alt"></i></div>
+          <h4 data-i18n="services.tours.title">Tour Packages</h4>
+          <p data-i18n="services.tours.desc">All-inclusive packages for families, couples, and solo travellers covering the world's most iconic destinations.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="serv-card reveal d5">
+          <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+          <h4 data-i18n="services.corp.title">Corporate Travel</h4>
+          <p data-i18n="services.corp.desc">Dedicated corporate management with priority booking, expense tracking, and round-the-clock business support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about" class="section-py" aria-labelledby="about-h" data-i18n-aria-label="about.aria">
+  <div class="container-xl">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="about-img-wrap reveal-left">
+          <img src="https://picsum.photos/640/530?random=10" class="about-img" alt="Danah Travel office in Riyadh" data-i18n-alt="about.imgAlt" loading="lazy">
+          <div class="about-badge-card">
+            <div class="about-badge-icon"><i class="fas fa-award"></i></div>
+            <div>
+              <div style="font-weight:700;font-size:.9rem;color:var(--text-h);" data-i18n="about.badge.title">Award-Winning Agency</div>
+              <div style="font-size:.78rem;color:var(--text-muted);" data-i18n="about.badge.desc">Best Travel Agency Riyadh — 2022 · 2023 · 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal-right">
+        <span class="tag"><i class="fas fa-building"></i> <span data-i18n="about.tag">About Danah</span></span>
+        <h2 class="sec-title" id="about-h" data-i18n-html="about.title">Riyadh's Premier<br>Travel Partner</h2>
+        <p style="margin-bottom:28px;" data-i18n="about.p1">
+          Located in the heart of downtown Riyadh, Danah has been connecting Saudi travellers to the world since 2016.
+          Our modern Al-Olaya Street office brings together expert consultants, cutting-edge booking technology,
+          and genuinely personalised service to make every journey exceptional.
+        </p>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="fas fa-shield-halved"></i></div>
+          <div>
+            <strong data-i18n="about.f1.title">Licensed &amp; IATA Accredited</strong>
+            <p data-i18n="about.f1.desc">Fully licensed by the Saudi Tourism Authority and accredited for international ticketing operations.</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="fas fa-headset"></i></div>
+          <div>
+            <strong data-i18n="about.f2.title">24/7 Expert Support</strong>
+            <p data-i18n="about.f2.desc">Our team is available around the clock to assist with changes, emergencies, and last-minute requests.</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="fas fa-tag"></i></div>
+          <div>
+            <strong data-i18n="about.f3.title">Best Price Guarantee</strong>
+            <p data-i18n="about.f3.desc">We match or beat any comparable quote — so you always travel at the best possible value.</p>
+          </div>
+        </div>
+        <a href="#booking" class="btn-blue mt-2">
+          <span data-i18n="about.cta">Start Planning</span> <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PORTFOLIO / GALLERY
+============================================================ -->
+<section id="portfolio" class="section-py bg-2" aria-labelledby="portfolio-h" data-i18n-aria-label="portfolio.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-images"></i> <span data-i18n="portfolio.tag">Destinations</span></span>
+      <h2 class="sec-title reveal d1" id="portfolio-h" data-i18n="portfolio.title">Explore Our Destinations</h2>
+      <p class="sec-sub reveal d2" data-i18n="portfolio.desc">
+        From the Arabian Gulf to European capitals — discover the routes our clients love most.
+      </p>
+    </div>
+    <div class="gal-grid reveal">
+      <div class="gal-item" data-gi="0">
+        <img src="https://picsum.photos/820/462?random=20" alt="Riyadh, Saudi Arabia" data-i18n-alt="portfolio.city1.alt" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><h5 data-i18n="portfolio.city1.name">Riyadh, Saudi Arabia</h5><span data-i18n="portfolio.city1.desc">Domestic · From SAR 190</span></div></div>
+        <div class="gal-zoom"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gal-item" data-gi="1">
+        <img src="https://picsum.photos/420/315?random=21" alt="Dubai, UAE" data-i18n-alt="portfolio.city2.alt" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><h5 data-i18n="portfolio.city2.name">Dubai, UAE</h5><span data-i18n="portfolio.city2.desc">Gulf · From SAR 450</span></div></div>
+        <div class="gal-zoom"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gal-item" data-gi="2">
+        <img src="https://picsum.photos/420/315?random=22" alt="Istanbul, Turkey" data-i18n-alt="portfolio.city3.alt" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><h5 data-i18n="portfolio.city3.name">Istanbul, Turkey</h5><span data-i18n="portfolio.city3.desc">Europe · From SAR 890</span></div></div>
+        <div class="gal-zoom"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gal-item" data-gi="3">
+        <img src="https://picsum.photos/420/315?random=23" alt="London, UK" data-i18n-alt="portfolio.city4.alt" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><h5 data-i18n="portfolio.city4.name">London, UK</h5><span data-i18n="portfolio.city4.desc">Europe · From SAR 2,100</span></div></div>
+        <div class="gal-zoom"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gal-item" data-gi="4">
+        <img src="https://picsum.photos/420/315?random=24" alt="Maldives" data-i18n-alt="portfolio.city5.alt" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><h5 data-i18n="portfolio.city5.name">Maldives</h5><span data-i18n="portfolio.city5.desc">Asia · From SAR 1,800</span></div></div>
+        <div class="gal-zoom"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+      <div class="gal-item" data-gi="5">
+        <img src="https://picsum.photos/420/315?random=25" alt="Paris, France" data-i18n-alt="portfolio.city6.alt" loading="lazy">
+        <div class="gal-overlay"><div class="gal-info"><h5 data-i18n="portfolio.city6.name">Paris, France</h5><span data-i18n="portfolio.city6.desc">Europe · From SAR 1,950</span></div></div>
+        <div class="gal-zoom"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BOOKING FORM
+============================================================ -->
+<section id="booking" class="section-py" aria-labelledby="booking-h" data-i18n-aria-label="booking.aria">
+  <div class="container-xl">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5 reveal-left">
+        <span class="tag"><i class="fas fa-plane"></i> <span data-i18n="booking.tag">Book Now</span></span>
+        <h2 class="sec-title" id="booking-h" data-i18n-html="booking.title">Find Your<br>Perfect Flight</h2>
+        <p style="margin-bottom:26px;" data-i18n="booking.desc">Search thousands of routes instantly. Our engine always finds the best fares across every major airline.</p>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="fas fa-bolt"></i></div>
+          <div><strong data-i18n="booking.f1.title">Instant E-Ticket</strong><p style="font-size:.845rem;margin:0;" data-i18n="booking.f1.desc">Receive your confirmed ticket within minutes of booking.</p></div>
+        </div>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="fas fa-rotate-left"></i></div>
+          <div><strong data-i18n="booking.f2.title">Free Cancellation</strong><p style="font-size:.845rem;margin:0;" data-i18n="booking.f2.desc">Cancel up to 24 hrs before departure for a full refund.</p></div>
+        </div>
+        <div class="about-feat">
+          <div class="feat-icon"><i class="fas fa-lock"></i></div>
+          <div><strong data-i18n="booking.f3.title">Secure Payments</strong><p style="font-size:.845rem;margin:0;" data-i18n="booking.f3.desc">Bank-level SSL encryption on every transaction.</p></div>
+        </div>
+      </div>
+      <div class="col-lg-7 reveal-right">
+        <div class="booking-wrap">
+          <div class="trip-tabs">
+            <button class="ttab on" data-tab="one" data-i18n="booking.tab1">One Way</button>
+            <button class="ttab"    data-tab="round" data-i18n="booking.tab2">Round Trip</button>
+            <button class="ttab"    data-tab="multi" data-i18n="booking.tab3">Multi-City</button>
+          </div>
+          <form id="booking-form" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label"><i class="fas fa-plane-departure text-primary me-1"></i><span data-i18n="booking.from">From</span></label>
+                <input type="text" class="form-control" id="bf-from" data-i18n-placeholder="booking.from_placeholder" placeholder="e.g. Riyadh (RUH)" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label"><i class="fas fa-plane-arrival text-primary me-1"></i><span data-i18n="booking.to">To</span></label>
+                <input type="text" class="form-control" id="bf-to" data-i18n-placeholder="booking.to_placeholder" placeholder="e.g. London (LHR)" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label"><i class="fas fa-calendar text-primary me-1"></i><span data-i18n="booking.depart">Departure</span></label>
+                <input type="date" class="form-control" id="bf-dep" required>
+              </div>
+              <div class="col-sm-6" id="return-col" style="display:none;">
+                <label class="form-label"><i class="fas fa-calendar-check text-primary me-1"></i><span data-i18n="booking.return">Return</span></label>
+                <input type="date" class="form-control" id="bf-ret">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label"><i class="fas fa-users text-primary me-1"></i><span data-i18n="booking.passengers">Passengers</span></label>
+                <select class="form-select">
+                  <option data-i18n="booking.pax1">1 Adult</option>
+                  <option data-i18n="booking.pax2">2 Adults</option>
+                  <option data-i18n="booking.pax3">2 Adults, 1 Child</option>
+                  <option data-i18n="booking.pax4">2 Adults, 2 Children</option>
+                  <option data-i18n="booking.pax5">Group (6+)</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label"><i class="fas fa-star text-primary me-1"></i><span data-i18n="booking.class">Cabin Class</span></label>
+                <select class="form-select">
+                  <option data-i18n="booking.class1">Economy</option>
+                  <option data-i18n="booking.class2">Premium Economy</option>
+                  <option data-i18n="booking.class3">Business Class</option>
+                  <option data-i18n="booking.class4">First Class</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-blue w-100" style="justify-content:center;">
+                  <i class="fas fa-search"></i> <span data-i18n="booking.search">Search Flights</span>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="form-msg" id="book-msg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICING
+============================================================ -->
+<section id="pricing" class="section-py bg-2" aria-labelledby="pricing-h" data-i18n-aria-label="pricing.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-tags"></i> <span data-i18n="pricing.tag">Pricing</span></span>
+      <h2 class="sec-title reveal d1" id="pricing-h" data-i18n="pricing.title">Packages for Every Budget</h2>
+      <p class="sec-sub reveal d2" data-i18n="pricing.desc">Transparent all-inclusive packages. No hidden fees. Choose the plan that fits your journey.</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="price-card reveal">
+          <div class="icon-box mb-3"><i class="fas fa-plane"></i></div>
+          <div class="price-name" data-i18n="pricing.econ.name">Economy</div>
+          <div class="price-val"><sup>SAR </sup>990</div>
+          <div class="price-period" data-i18n="pricing.econ.period">per person / 7 nights</div>
+          <ul class="price-list">
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.econ.f1">Economy class flights</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.econ.f2">3-star hotel included</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.econ.f3">Airport transfers</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.econ.f4">Travel insurance</span></li>
+            <li><i class="fas fa-xmark dash"></i><span data-i18n="pricing.econ.f5">Visa processing</span></li>
+            <li><i class="fas fa-xmark dash"></i><span data-i18n="pricing.econ.f6">Guided tours</span></li>
+            <li><i class="fas fa-xmark dash"></i><span data-i18n="pricing.econ.f7">Meals included</span></li>
+          </ul>
+          <button class="btn-price-outline" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})" data-i18n="pricing.cta">Get Started</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="price-card feat reveal d1">
+          <div class="price-pop" data-i18n="pricing.pop">Most Popular</div>
+          <div class="icon-box mb-3" style="background:var(--blue);color:#fff;"><i class="fas fa-star"></i></div>
+          <div class="price-name" data-i18n="pricing.biz.name">Business</div>
+          <div class="price-val"><sup>SAR </sup>2,490</div>
+          <div class="price-period" data-i18n="pricing.biz.period">per person / 10 nights</div>
+          <ul class="price-list">
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.biz.f1">Business class flights</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.biz.f2">5-star hotel included</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.biz.f3">Private transfers</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.biz.f4">Premium insurance</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.biz.f5">Visa processing</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.biz.f6">2 guided tours</span></li>
+            <li><i class="fas fa-xmark dash"></i><span data-i18n="pricing.biz.f7">All meals included</span></li>
+          </ul>
+          <button class="btn-price-fill" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})" data-i18n="pricing.cta">Get Started</button>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="price-card reveal d2">
+          <div class="icon-box mb-3"><i class="fas fa-crown"></i></div>
+          <div class="price-name" data-i18n="pricing.prem.name">Premium</div>
+          <div class="price-val"><sup>SAR </sup>5,200</div>
+          <div class="price-period" data-i18n="pricing.prem.period">per person / 14 nights</div>
+          <ul class="price-list">
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f1">First class flights</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f2">Luxury resort suite</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f3">Limousine transfers</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f4">VIP concierge</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f5">Express visa service</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f6">Unlimited guided tours</span></li>
+            <li><i class="fas fa-check chk"></i><span data-i18n="pricing.prem.f7">All meals &amp; drinks</span></li>
+          </ul>
+          <button class="btn-price-outline" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})" data-i18n="pricing.cta">Get Started</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BAND
+============================================================ -->
+<section id="cta-band" aria-label="Special offer" data-i18n-aria-label="cta.aria">
+  <div class="container-xl inner">
+    <span class="tag reveal" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);">
+      <i class="fas fa-fire"></i> <span data-i18n="cta.tag">Limited Time</span>
+    </span>
+    <h2 class="reveal d1" data-i18n="cta.title">Ready to Explore the World?</h2>
+    <p class="reveal d2" data-i18n-html="cta.desc">Book before 31 August 2026 and save <strong>15%</strong> on all international packages. Code: <strong>DANAH15</strong></p>
+    <div class="d-flex justify-content-center flex-wrap gap-3 reveal d3">
+      <a href="#booking" class="btn-blue" style="background:#fff;color:var(--blue);">
+        <i class="fas fa-paper-plane"></i> <span data-i18n="cta.btn1">Book Now &amp; Save 15%</span>
+      </a>
+      <a href="#contact" class="btn-ghost"><i class="fas fa-phone"></i> <span data-i18n="cta.btn2">Talk to an Expert</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TEAM
+============================================================ -->
+<section id="team" class="section-py" aria-labelledby="team-h" data-i18n-aria-label="team.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-users"></i> <span data-i18n="team.tag">Our Team</span></span>
+      <h2 class="sec-title reveal d1" id="team-h" data-i18n="team.title">Meet the Danah Experts</h2>
+      <p class="sec-sub reveal d2" data-i18n="team.desc">Passionate travel professionals dedicated to crafting unforgettable experiences for every client.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="team-card reveal">
+          <img class="team-avatar" src="https://picsum.photos/200/200?random=30" alt="Sarah Al-Rashid, General Director" data-i18n-alt="team.m1.alt">
+          <div class="team-name" data-i18n="team.m1.name">Sarah Al-Rashid</div>
+          <div class="team-role" data-i18n="team.m1.role">General Director</div>
+          <p class="team-bio" data-i18n="team.m1.bio">15+ years in luxury travel management with extensive expertise in GCC and European markets.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn" data-i18n-aria-label="social.linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter/X" data-i18n-aria-label="social.twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="Instagram" data-i18n-aria-label="social.instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="team-card reveal d1">
+          <img class="team-avatar" src="https://picsum.photos/200/200?random=31" alt="Khalid Al-Otaibi, Head of Operations" data-i18n-alt="team.m2.alt">
+          <div class="team-name" data-i18n="team.m2.name">Khalid Al-Otaibi</div>
+          <div class="team-role" data-i18n="team.m2.role">Head of Operations</div>
+          <p class="team-bio" data-i18n="team.m2.bio">Aviation veteran with 12 years managing international flight bookings and airline partnerships across 40+ countries.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn" data-i18n-aria-label="social.linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter/X" data-i18n-aria-label="social.twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="Instagram" data-i18n-aria-label="social.instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="team-card reveal d2">
+          <img class="team-avatar" src="https://picsum.photos/200/200?random=32" alt="Nora Al-Shamrani, Visa Specialist" data-i18n-alt="team.m3.alt">
+          <div class="team-name" data-i18n="team.m3.name">Nora Al-Shamrani</div>
+          <div class="team-role" data-i18n="team.m3.role">Visa Specialist</div>
+          <p class="team-bio" data-i18n="team.m3.bio">Certified immigration consultant with a 98%+ success rate across Europe, UK, USA, and Schengen applications.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn" data-i18n-aria-label="social.linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter/X" data-i18n-aria-label="social.twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="Instagram" data-i18n-aria-label="social.instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="team-card reveal d3">
+          <img class="team-avatar" src="https://picsum.photos/200/200?random=33" alt="Omar Al-Zahrani, Tour Coordinator" data-i18n-alt="team.m4.alt">
+          <div class="team-name" data-i18n="team.m4.name">Omar Al-Zahrani</div>
+          <div class="team-role" data-i18n="team.m4.role">Tour Coordinator</div>
+          <p class="team-bio" data-i18n="team.m4.bio">Specialist in curated Middle East and Asia-Pacific packages with 9 years of on-ground destination experience.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn" data-i18n-aria-label="social.linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter/X" data-i18n-aria-label="social.twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="Instagram" data-i18n-aria-label="social.instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section id="testimonials" class="section-py bg-2" aria-labelledby="testimonials-h" data-i18n-aria-label="testimonials.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-quote-left"></i> <span data-i18n="testimonials.tag">Client Reviews</span></span>
+      <h2 class="sec-title reveal d1" id="testimonials-h" data-i18n="testimonials.title">What Our Travellers Say</h2>
+      <p class="sec-sub reveal d2" data-i18n="testimonials.desc">Over 12,000 happy clients and counting — here's what some of them have shared about their Danah experience.</p>
+    </div>
+    <div class="tslider reveal">
+      <div class="ttrack">
+        <!-- Slide 1 -->
+        <div class="tslide">
+          <div class="tcard">
+            <div class="t-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="t-quote" data-i18n="testimonials.t1.quote">"Danah made our family trip to London absolutely seamless. The visa processing was incredibly fast — approved in just four days — and the business-class fares they found were better than anything we could find online. Highly recommended for anyone travelling from Riyadh."</p>
+            <div class="t-author">
+              <img class="t-avatar" src="https://picsum.photos/50/50?random=40" alt="Abdullah Al-Harbi" data-i18n-alt="testimonials.t1.avatarAlt">
+              <div>
+                <div class="t-name" data-i18n="testimonials.t1.name">Abdullah Al-Harbi</div>
+                <div class="t-info" data-i18n="testimonials.t1.info">Family trip to London · June 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="tslide">
+          <div class="tcard">
+            <div class="t-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="t-quote" data-i18n="testimonials.t2.quote">"As a frequent corporate traveller, I've tried many agencies in Riyadh. Danah is in a league of its own. Their 24/7 support saved me when my Istanbul flight was cancelled at midnight — they had me rebooked on the next departure within 20 minutes."</p>
+            <div class="t-author">
+              <img class="t-avatar" src="https://picsum.photos/50/50?random=41" alt="Reem Al-Ghamdi" data-i18n-alt="testimonials.t2.avatarAlt">
+              <div>
+                <div class="t-name" data-i18n="testimonials.t2.name">Reem Al-Ghamdi</div>
+                <div class="t-info" data-i18n="testimonials.t2.info">Corporate client · Istanbul, Turkey</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="tslide">
+          <div class="tcard">
+            <div class="t-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i>
+            </div>
+            <p class="t-quote" data-i18n="testimonials.t3.quote">"The Maldives package was beyond our expectations. Every detail — from the resort transfer to the snorkelling tour — was handled perfectly. Nora guided us through the Schengen visa process with complete professionalism. We'll be back for our next trip."</p>
+            <div class="t-author">
+              <img class="t-avatar" src="https://picsum.photos/50/50?random=42" alt="Faisal & Maha Al-Dosari" data-i18n-alt="testimonials.t3.avatarAlt">
+              <div>
+                <div class="t-name" data-i18n="testimonials.t3.name">Faisal &amp; Maha Al-Dosari</div>
+                <div class="t-info" data-i18n="testimonials.t3.info">Honeymoon package · Maldives</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="tslide">
+          <div class="tcard">
+            <div class="t-stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p class="t-quote" data-i18n="testimonials.t4.quote">"I booked a last-minute trip to Dubai through Danah's website at 11 PM on a Thursday. By Friday morning I had my e-ticket, hotel confirmation, and transfer voucher in my inbox. The price was excellent and the whole process took less than an hour."</p>
+            <div class="t-author">
+              <img class="t-avatar" src="https://picsum.photos/50/50?random=43" alt="Sara Al-Mutairi" data-i18n-alt="testimonials.t4.avatarAlt">
+              <div>
+                <div class="t-name" data-i18n="testimonials.t4.name">Sara Al-Mutairi</div>
+                <div class="t-info" data-i18n="testimonials.t4.info">Weekend trip to Dubai · July 2025</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Slider controls -->
+    <div class="slider-ctrl">
+      <button class="s-btn" id="t-prev" aria-label="Previous review" data-i18n-aria-label="testimonials.prev"><i class="fas fa-chevron-left"></i></button>
+      <div class="s-dots">
+        <div class="s-dot on" data-slide="0"></div>
+        <div class="s-dot"    data-slide="1"></div>
+        <div class="s-dot"    data-slide="2"></div>
+        <div class="s-dot"    data-slide="3"></div>
+      </div>
+      <button class="s-btn" id="t-next" aria-label="Next review" data-i18n-aria-label="testimonials.next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section id="faq" class="section-py" aria-labelledby="faq-h" data-i18n-aria-label="faq.aria">
+  <div class="container-xl">
+    <div class="row g-5">
+      <div class="col-lg-5 reveal-left">
+        <span class="tag"><i class="fas fa-circle-question"></i> <span data-i18n="faq.tag">FAQ</span></span>
+        <h2 class="sec-title" id="faq-h" data-i18n-html="faq.title">Frequently Asked<br>Questions</h2>
+        <p data-i18n="faq.desc">Can't find your answer here? Our team is available 24/7 to help with anything travel-related.</p>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:14px;">
+          <a href="#contact" class="btn-blue" style="align-self:flex-start;">
+            <i class="fas fa-headset"></i> <span data-i18n="faq.cta">Contact Support</span>
+          </a>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
+            <div style="width:40px;height:40px;background:var(--blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0;">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <div style="font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);" data-i18n="faq.callLabel">Call Us Directly</div>
+              <div style="font-size:.95rem;font-weight:700;color:var(--text-h);">+966 11 234 5678</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 reveal-right">
+        <div class="faq">
+          <div class="faq-q"><h5 data-i18n="faq.q1">How quickly can I receive my flight ticket after booking?</h5><div class="faq-ico"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a1">For most standard international and domestic routes, your e-ticket is issued instantly upon payment confirmation. For group bookings or charter flights, processing may take up to 2 hours. You'll receive your e-ticket by email and WhatsApp the moment it's confirmed.</div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><h5 data-i18n="faq.q2">Which countries do you provide visa services for?</h5><div class="faq-ico"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a2">We process visa applications for 60+ countries, including all Schengen countries, the United Kingdom, the United States, Canada, Australia, Japan, and all GCC member states. Our team handles the full documentation process — you just provide the required papers.</div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><h5 data-i18n="faq.q3">Can I modify or cancel my booking after confirmation?</h5><div class="faq-ico"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a3">Yes. Changes and cancellations are handled according to the airline's fare rules. For packages booked directly through Danah, we offer free cancellation up to 48 hours before the first flight. Modifications requested more than 72 hours in advance are processed at no charge for Danah service fees.</div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><h5 data-i18n="faq.q4">Do you offer travel insurance with your packages?</h5><div class="faq-ico"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a4">Yes. All Danah packages include basic travel and medical insurance. Our Business and Premium packages include comprehensive international coverage worth up to SAR 750,000. You can also add standalone travel insurance to any flight-only booking during the checkout process.</div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><h5 data-i18n="faq.q5">What payment methods do you accept?</h5><div class="faq-ico"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a5">We accept mada, Visa, Mastercard, American Express, Apple Pay, STC Pay, bank transfer, and corporate invoicing. All transactions are secured with 256-bit SSL encryption. Installment payment plans are available for packages above SAR 3,000 via Tabby and Tamara.</div></div>
+        </div>
+        <div class="faq">
+          <div class="faq-q"><h5 data-i18n="faq.q6">Is Danah a licensed travel agency in Saudi Arabia?</h5><div class="faq-ico"><i class="fas fa-plus"></i></div></div>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a6">Yes. Danah is fully licensed by the Saudi Tourism Authority (STA) with license number STA-RUH-2016-0442, and holds active IATA accreditation for international ticketing. You can verify our credentials directly on the Saudi Tourism Authority portal.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RESERVATION FORM
+============================================================ -->
+<section id="reservation" class="section-py bg-2" aria-labelledby="res-h" data-i18n-aria-label="reservation.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-calendar-check"></i> <span data-i18n="reservation.tag">Reserve</span></span>
+      <h2 class="sec-title reveal d1" id="res-h" data-i18n="reservation.title">Request a Reservation</h2>
+      <p class="sec-sub reveal d2" data-i18n="reservation.desc">Fill in your travel details and a Danah consultant will call you back within 2 hours to confirm availability and pricing.</p>
+    </div>
+    <div id="reservation" class="reveal">
+      <div class="booking-wrap" style="max-width:820px;margin:0 auto;">
+        <div class="res-steps">
+          <div class="res-step done">
+            <div class="res-step-num">1</div>
+            <span data-i18n="reservation.step1">Trip Details</span>
+          </div>
+          <div class="res-step done">
+            <div class="res-step-num">2</div>
+            <span data-i18n="reservation.step2">Preferences</span>
+          </div>
+          <div class="res-step done">
+            <div class="res-step-num">3</div>
+            <span data-i18n="reservation.step3">Confirm</span>
+          </div>
+        </div>
+        <form id="reservation-form" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-user text-primary me-1"></i><span data-i18n="reservation.fullName">Full Name</span></label>
+              <input type="text" class="form-control" data-i18n-placeholder="reservation.fullName_placeholder" placeholder="e.g. Mohammed Al-Qahtani" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-phone text-primary me-1"></i><span data-i18n="reservation.phone">Phone Number</span></label>
+              <input type="tel" class="form-control" data-i18n-placeholder="reservation.phone_placeholder" placeholder="+966 5X XXX XXXX" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-envelope text-primary me-1"></i><span data-i18n="reservation.email">Email Address</span></label>
+              <input type="email" class="form-control" data-i18n-placeholder="reservation.email_placeholder" placeholder="you@example.com" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-globe text-primary me-1"></i><span data-i18n="reservation.destination">Destination</span></label>
+              <input type="text" class="form-control" data-i18n-placeholder="reservation.destination_placeholder" placeholder="e.g. Paris, France" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-calendar text-primary me-1"></i><span data-i18n="reservation.travelDate">Travel Date</span></label>
+              <input type="date" class="form-control" required>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-users text-primary me-1"></i><span data-i18n="reservation.travellers">Number of Travellers</span></label>
+              <select class="form-select" required>
+                <option value="" data-i18n="reservation.select">Select</option>
+                <option data-i18n="reservation.pax1">1 Person</option>
+                <option data-i18n="reservation.pax2">2 People</option>
+                <option data-i18n="reservation.pax3">3–5 People</option>
+                <option data-i18n="reservation.pax4">6–10 People</option>
+                <option data-i18n="reservation.pax5">Group 10+</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-suitcase-rolling text-primary me-1"></i><span data-i18n="reservation.packageType">Package Type</span></label>
+              <select class="form-select">
+                <option data-i18n="reservation.pkg1">Economy Package</option>
+                <option data-i18n="reservation.pkg2">Business Package</option>
+                <option data-i18n="reservation.pkg3">Premium Package</option>
+                <option data-i18n="reservation.pkg4">Custom / Bespoke</option>
+                <option data-i18n="reservation.pkg5">Flight Only</option>
+                <option data-i18n="reservation.pkg6">Visa Only</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label"><i class="fas fa-coins text-primary me-1"></i><span data-i18n="reservation.budget">Approximate Budget</span></label>
+              <select class="form-select">
+                <option data-i18n="reservation.budget1">Below SAR 2,000</option>
+                <option data-i18n="reservation.budget2">SAR 2,000 – 5,000</option>
+                <option data-i18n="reservation.budget3">SAR 5,000 – 10,000</option>
+                <option data-i18n="reservation.budget4">SAR 10,000 – 20,000</option>
+                <option data-i18n="reservation.budget5">SAR 20,000+</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label"><i class="fas fa-comment text-primary me-1"></i><span data-i18n="reservation.notes">Special Requests or Notes</span></label>
+              <textarea class="form-control" data-i18n-placeholder="reservation.notes_placeholder" placeholder="Any special requirements, dietary needs, preferred airlines, hotel preferences…"></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn-blue w-100" style="justify-content:center;padding:15px;">
+                <i class="fas fa-calendar-check"></i> <span data-i18n="reservation.submit">Submit Reservation Request</span>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="form-msg" id="res-msg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section id="contact" class="section-py" aria-labelledby="contact-h" data-i18n-aria-label="contact.aria">
+  <div class="container-xl">
+    <div class="sec-header">
+      <span class="tag reveal"><i class="fas fa-envelope"></i> <span data-i18n="contact.tag">Contact</span></span>
+      <h2 class="sec-title reveal d1" id="contact-h" data-i18n="contact.title">Get in Touch</h2>
+      <p class="sec-sub reveal d2" data-i18n="contact.desc">Visit us in downtown Riyadh, send a message online, or call our travel experts — we're always ready to help.</p>
+    </div>
+    <div class="row g-5">
+      <!-- Left: info + map -->
+      <div class="col-lg-5 reveal-left">
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-location-dot"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.addressLabel">Office Address</div>
+            <div class="c-val" data-i18n="contact.address">Al-Olaya Street, Al-Murabba District<br>Riyadh 12244, Saudi Arabia</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.phoneLabel">Phone</div>
+            <div class="c-val">+966 11 234 5678</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-mobile-screen"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.whatsappLabel">WhatsApp</div>
+            <div class="c-val">+966 50 123 4567</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.emailLabel">Email</div>
+            <div class="c-val">info@danahtravel.sa</div>
+          </div>
+        </div>
+        <div class="cinfo">
+          <div class="c-icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <div class="c-lbl" data-i18n="contact.hoursLabel">Office Hours</div>
+            <div class="c-val" data-i18n="contact.hours">Sunday–Thursday: 8:00 AM – 9:00 PM<br>Friday–Saturday: 10:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+        <!-- Google Maps embed (Al-Olaya, Riyadh) -->
+        <div class="map-wrap">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.9846537053196!2d46.6785!3d24.6877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sAl%20Olaya%2C%20Riyadh%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1699000000000!5m2!1sen!2s"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Danah Travel office location on Google Maps"
+            data-i18n-title="contact.mapTitle">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Right: contact form -->
+      <div class="col-lg-7 reveal-right">
+        <div class="booking-wrap">
+          <h3 style="font-family:var(--ff-body);font-size:1.2rem;font-weight:700;margin-bottom:6px;" data-i18n="contact.formTitle">Send Us a Message</h3>
+          <p style="font-size:.875rem;margin-bottom:24px;" data-i18n="contact.formDesc">We typically respond within 2–4 hours during business hours.</p>
+          <form id="contact-form" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.yourName">Your Name</label>
+                <input type="text" class="form-control" data-i18n-placeholder="contact.yourName_placeholder" placeholder="Full name" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.yourEmail">Email Address</label>
+                <input type="email" class="form-control" data-i18n-placeholder="contact.yourEmail_placeholder" placeholder="you@example.com" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.yourPhone">Phone Number</label>
+                <input type="tel" class="form-control" data-i18n-placeholder="contact.yourPhone_placeholder" placeholder="+966 5X XXX XXXX">
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label" data-i18n="contact.subject">Subject</label>
+                <select class="form-select" required>
+                  <option value="" data-i18n="contact.subject_placeholder">Select a topic</option>
+                  <option data-i18n="contact.topic1">Flight Booking</option>
+                  <option data-i18n="contact.topic2">Visa Services</option>
+                  <option data-i18n="contact.topic3">Tour Package</option>
+                  <option data-i18n="contact.topic4">Hotel Booking</option>
+                  <option data-i18n="contact.topic5">Corporate Travel</option>
+                  <option data-i18n="contact.topic6">Complaint / Feedback</option>
+                  <option data-i18n="contact.topic7">Other</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label" data-i18n="contact.message">Message</label>
+                <textarea class="form-control" data-i18n-placeholder="contact.message_placeholder" placeholder="Tell us about your travel plans or ask us anything…" required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn-blue w-100" style="justify-content:center;padding:14px;">
+                  <i class="fas fa-paper-plane"></i> <span data-i18n="contact.send">Send Message</span>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="form-msg" id="contact-msg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

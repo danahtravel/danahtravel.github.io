@@ -1,0 +1,301 @@
+<p><a href="http://michalsnik.github.io/aos/"><img src="https://s32.postimg.org/ktvt59hol/aos_header.png" alt="AOS - Animate on scroll library"></a></p>
+<p><a href="https://npmjs.org/package/aos"><img src="https://img.shields.io/npm/v/aos.svg?style=flat" alt="NPM version"></a>
+<a href="https://npmjs.org/package/aos"><img src="https://img.shields.io/npm/dm/aos.svg?style=flat" alt="NPM downloads"></a>
+<a href="https://travis-ci.org/michalsnik/aos"><img src="https://travis-ci.org/michalsnik/aos.svg?branch=master" alt="Build Status"></a>
+<a href="https://gitter.im/michalsnik/aos?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/michalsnik/aos.svg" alt="Gitter"></a></p>
+<p><a href="#!/michalsnik"><img src="https://img.shields.io/twitter/follow/michalsnik.svg?style=social" alt="Twitter Follow"></a> <a href="#!/home?status=AOS%20-%20Animate%20on%20Scroll%20library%0Ahttps%3A//github.com/michalsnik/aos"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Twitter URL"></a></p>
+<p>Small library to animate elements on your page as you scroll.</p>
+<p>You may say it's like WOWJS, yeah - you're right, effect is similar to WOWJS, but I had a different idea how to make such a plugin, so here it is. CSS3 driven scroll animation library.</p>
+<p>AOS allows you to animate elements as you scroll down, and up.
+If you scroll back to top, elements will animate to it's previous state and are ready to animate again if you scroll down.</p>
+<p>👉 To get a better understanding how this actually works, I encourage you to check <a href="https://css-tricks.com/aos-css-driven-scroll-animation-library/">my post on CSS-tricks</a>.</p>
+<hr>
+<h3>🚀 <a href="http://michalsnik.github.io/aos/">Demo</a></h3>
+<h3>🌟 Codepen Examples</h3>
+<ul>
+<li><a href="http://codepen.io/michalsnik/pen/WxNdvq">Different build in animations</a></li>
+<li><a href="http://codepen.io/michalsnik/pen/jrOYVO">With anchor setting in use</a></li>
+<li><a href="http://codepen.io/michalsnik/pen/EyxoNm">With anchor-placement and different easing</a></li>
+<li><a href="http://codepen.io/michalsnik/pen/WxvNvE">With simple custom animations</a></li>
+</ul>
+<hr>
+<h2>❗ Attention</h2>
+<p>From version <code>2.0.0</code> attributes <code>aos</code> are no longer supported, always use <code>data-aos</code>.</p>
+<h2>⚙ Setup</h2>
+<h3>Install AOS</h3>
+<ul>
+<li>
+<p>Using <code>bower</code></p>
+<pre><code class="language-bash">  bower install aos --save
+</code></pre>
+</li>
+<li>
+<p>Using <code>npm</code></p>
+<pre><code class="language-bash">  npm install aos --save
+</code></pre>
+</li>
+<li>
+<p>Direct download -&gt; <a href="https://github.com/michalsnik/aos/archive/master.zip">click here</a></p>
+</li>
+</ul>
+<h3>Link styles</h3>
+<pre><code class="language-html">  &lt;link rel=&quot;stylesheet&quot; href=&quot;bower_components/aos/dist/aos.css&quot; /&gt;
+</code></pre>
+<h3>Add scripts</h3>
+<pre><code class="language-html">  &lt;script src=&quot;bower_components/aos/dist/aos.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>AOS from version <code>1.2.0</code> is available as UMD module, so you can use it as AMD, Global, Node or ES6 module.</p>
+<h3>Init AOS</h3>
+<pre><code class="language-javascript">  &lt;script&gt;
+    AOS.init();
+  &lt;/script&gt;
+</code></pre>
+<h2>🤔 How to use it?</h2>
+<h3>Basic usage</h3>
+<p>All you have to do is to add <code>data-aos</code> attribute to html element, like so:</p>
+<pre><code class="language-html">  &lt;div data-aos=&quot;animation_name&quot;&gt;
+</code></pre>
+<p>Script will trigger &quot;animation_name&quot; animation on this element, if you scroll to it.</p>
+<p><a href="https://github.com/michalsnik/aos#-animations">Down below</a> is a list of all available animations for now :)</p>
+<h3>🔥 Advanced settings</h3>
+<p>These settings can be set both on certain elements, or as default while initializing script (in options object without <code>data-</code> part).</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+<th>Example value</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><code>data-aos-offset</code></em></td>
+<td>Change offset to trigger animations sooner or later (px)</td>
+<td>200</td>
+<td>120</td>
+</tr>
+<tr>
+<td><em><code>data-aos-duration</code></em></td>
+<td>*Duration of animation (ms)</td>
+<td>600</td>
+<td>400</td>
+</tr>
+<tr>
+<td><em><code>data-aos-easing</code></em></td>
+<td>Choose timing function to ease elements in different ways</td>
+<td>ease-in-sine</td>
+<td>ease</td>
+</tr>
+<tr>
+<td><em><code>data-aos-delay</code></em></td>
+<td>Delay animation (ms)</td>
+<td>300</td>
+<td>0</td>
+</tr>
+<tr>
+<td><em><code>data-aos-anchor</code></em></td>
+<td>Anchor element, whose offset will be counted to trigger animation instead of actual elements offset</td>
+<td>#selector</td>
+<td>null</td>
+</tr>
+<tr>
+<td><em><code>data-aos-anchor-placement</code></em></td>
+<td>Anchor placement - which one position of element on the screen should trigger animation</td>
+<td>top-center</td>
+<td>top-bottom</td>
+</tr>
+<tr>
+<td><em><code>data-aos-once</code></em></td>
+<td>Choose wheter animation should fire once, or every time you scroll up/down to element</td>
+<td>true</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<p>*Duration accept values from 50 to 3000, with step 50ms, it's because duration of animation is handled by css, and to not make css longer than it is already I created implementations only in this range. I think this should be good for almost all cases.</p>
+<p>If not, you may write simple CSS on your page that will add another duration option value available, for example:</p>
+<pre><code class="language-css">  body[data-aos-duration='4000'] [data-aos], [data-aos][data-aos][data-aos-duration='4000']{
+    transition-duration: 4000ms;
+  }
+</code></pre>
+<p>This code will add 4000ms duration available for you to set on AOS elements, or to set as global duration while initializing AOS script.</p>
+<p>Notice that double <code>[data-aos][data-aos]</code> - it's not a mistake, it is a trick, to make individual settings more important than global, without need to write ugly &quot;!important&quot; there :)</p>
+<p><code>data-aos-anchor-placement</code> - You can set different placement option on each element, the principle is pretty simple, each anchor-placement option contains two words i.e. <code>top-center</code>. This means that animation will be triggered when <code>top</code> of element will reach <code>center</code> of the window.
+<code>bottom-top</code> means that animation will be triggered when <code>bottom</code> of an element reach <code>top</code> of the window, and so on.
+Down below you can find list of all anchor-placement options.</p>
+<h4>Examples:</h4>
+<pre><code class="language-html">  &lt;div data-aos=&quot;fade-zoom-in&quot; data-aos-offset=&quot;200&quot; data-aos-easing=&quot;ease-in-sine&quot; data-aos-duration=&quot;600&quot;&gt;
+</code></pre>
+<pre><code class="language-html">  &lt;div data-aos=&quot;flip-left&quot; data-aos-delay=&quot;100&quot; data-aos-anchor=&quot;.example-selector&quot;&gt;
+</code></pre>
+<pre><code class="language-html">  &lt;div data-aos=&quot;fade-up&quot; data-aos-anchor-placement=&quot;top-center&quot;&gt;
+</code></pre>
+<h4>API</h4>
+<p>AOS object is exposed as a global variable, for now there are three methods available:</p>
+<ul>
+<li><code>init</code> - initialize AOS</li>
+<li><code>refresh</code> - recalculate all offsets and positions of elements (called on window resize)</li>
+<li><code>refreshHard</code> - reinit array with AOS elements and trigger <code>refresh</code> (called on DOM changes that are related to <code>aos</code> elements)</li>
+</ul>
+<p>Example execution:</p>
+<pre><code class="language-javascript">  AOS.refresh();
+</code></pre>
+<p>By default AOS is watching for DOM changes and if there are any new elements loaded asynchronously or when something is removed from DOM it calls <code>refreshHard</code> automatically. In browsers that don't support <code>MutationObserver</code> like IE you might need to call <code>AOS.refreshHard()</code> by yourself.</p>
+<p><code>refresh</code> method is called on window resize and so on, as it doesn't require to build new store with AOS elements and should be as light as possible.</p>
+<h3>Global settings</h3>
+<p>If you don't want to change setting for each element separately, you can change it globally.</p>
+<p>To do this, pass options object to <code>init()</code> function, like so:</p>
+<pre><code class="language-javascript">  &lt;script&gt;
+    AOS.init({
+      offset: 200,
+      duration: 600,
+      easing: 'ease-in-sine',
+      delay: 100,
+    });
+  &lt;/script&gt;
+</code></pre>
+<h4>Additional configuration</h4>
+<p>These settings can be set only in options object while initializing AOS.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+<th>Example value</th>
+<th>Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><code>disable</code></em></td>
+<td>Condition when AOS should be disabled</td>
+<td>mobile</td>
+<td>false</td>
+</tr>
+<tr>
+<td><em><code>startEvent</code></em></td>
+<td>Name of event, on which AOS should be initialized</td>
+<td>exampleEvent</td>
+<td>DOMContentLoaded</td>
+</tr>
+</tbody>
+</table>
+<h5>Disabling AOS</h5>
+<p>If you want to disable AOS on certain device or under any statement you can set <code>disable</code> option. Like so:</p>
+<pre><code class="language-javascript">  &lt;script&gt;
+    AOS.init({
+      disable: 'mobile'
+    });
+  &lt;/script&gt;
+</code></pre>
+<p>There are several options that you can use to fit AOS perfectly into your project, you can pass one of three device types:
+<code>mobile</code> (phones and tablets), <code>phone</code> or <code>tablet</code>. This will disable AOS on those certains devices. But if you want make your own condition, simple type your statement instead of device type name:</p>
+<pre><code class="language-javascript">  disable: window.innerWidth &lt; 1024
+</code></pre>
+<p>There is also posibility to pass a <code>function</code>, which should at the end return <code>true</code> or <code>false</code>:</p>
+<pre><code class="language-javascript">  disable: function () {
+    var maxWidth = 1024;
+    return window.innerWidth &lt; maxWidth;
+  }
+</code></pre>
+<h5>Start event</h5>
+<p>If you don't want to initialize AOS on <code>DOMContentLoaded</code> event, you can pass your own event name and trigger it whenever you want. AOS is listening for this event on <code>document</code> element.</p>
+<pre><code class="language-javascript">  &lt;script&gt;
+    AOS.init({
+      startEvent: 'someCoolEvent'
+    });
+  &lt;/script&gt;
+</code></pre>
+<p><strong>Important note:</strong> If you set <code>startEvent: 'load'</code> it will add event listener on <code>window</code> instead of <code>document</code>.</p>
+<h3>👻 Animations</h3>
+<p>There are serveral predefined animations you can use already:</p>
+<ul>
+<li>
+<p>Fade animations:</p>
+<ul>
+<li>fade</li>
+<li>fade-up</li>
+<li>fade-down</li>
+<li>fade-left</li>
+<li>fade-right</li>
+<li>fade-up-right</li>
+<li>fade-up-left</li>
+<li>fade-down-right</li>
+<li>fade-down-left</li>
+</ul>
+</li>
+<li>
+<p>Flip animations:</p>
+<ul>
+<li>flip-up</li>
+<li>flip-down</li>
+<li>flip-left</li>
+<li>flip-right</li>
+</ul>
+</li>
+<li>
+<p>Slide animations:</p>
+<ul>
+<li>slide-up</li>
+<li>slide-down</li>
+<li>slide-left</li>
+<li>slide-right</li>
+</ul>
+</li>
+<li>
+<p>Zoom animations:</p>
+<ul>
+<li>zoom-in</li>
+<li>zoom-in-up</li>
+<li>zoom-in-down</li>
+<li>zoom-in-left</li>
+<li>zoom-in-right</li>
+<li>zoom-out</li>
+<li>zoom-out-up</li>
+<li>zoom-out-down</li>
+<li>zoom-out-left</li>
+<li>zoom-out-right</li>
+</ul>
+</li>
+</ul>
+<h3>Anchor placement:</h3>
+<ul>
+<li>top-bottom</li>
+<li>top-center</li>
+<li>top-top</li>
+<li>center-bottom</li>
+<li>center-center</li>
+<li>center-top</li>
+<li>bottom-bottom</li>
+<li>bottom-center</li>
+<li>bottom-top</li>
+</ul>
+<h3>Easing functions:</h3>
+<p>You can choose one of these timing function to animate elements nicely:</p>
+<ul>
+<li>linear</li>
+<li>ease</li>
+<li>ease-in</li>
+<li>ease-out</li>
+<li>ease-in-out</li>
+<li>ease-in-back</li>
+<li>ease-out-back</li>
+<li>ease-in-out-back</li>
+<li>ease-in-sine</li>
+<li>ease-out-sine</li>
+<li>ease-in-out-sine</li>
+<li>ease-in-quad</li>
+<li>ease-out-quad</li>
+<li>ease-in-out-quad</li>
+<li>ease-in-cubic</li>
+<li>ease-out-cubic</li>
+<li>ease-in-out-cubic</li>
+<li>ease-in-quart</li>
+<li>ease-out-quart</li>
+<li>ease-in-out-quart</li>
+</ul>
+<h2>✌️ <a href="CONTRIBUTING.md">Contributing</a></h2>
+<h2>📝 <a href="CHANGELOG.md">Changelog</a></h2>
+<h2>❔Questions</h2>
+<p>If you have any questions, ideas or whatsoever, please check <a href="CONTRIBUTING.md">AOS contribution guide</a> and don't hesitate to create new issues.</p>

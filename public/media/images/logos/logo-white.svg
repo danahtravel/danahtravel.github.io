@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 60" width="250" height="60">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    .accent-shape { 
+      animation: float 3.5s ease-in-out infinite; 
+    }
+  </style>
+
+  <text x="0" y="36" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="34px" fill="#FFFFFF" letter-spacing="-1px">DANAH</text>
+  
+  <text x="2" y="52" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="11px" fill="#A0A0A0" letter-spacing="6.25px">FOR TRAVEL</text>
+  
+  <path class="accent-shape" d="M105 14 L117 14 L123 26 L111 26 Z" fill="#b4ff5c"/>
+</svg>

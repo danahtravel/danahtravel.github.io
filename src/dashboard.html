@@ -1,0 +1,140 @@
+---
+layout: base.njk
+title: Client Dashboard | Danah Travel & Tourism
+description: Manage your bookings, view itineraries, and update your travel profile.
+pageScript: /assets/js/dashboard-page.js
+includeHomepageScript: false
+---
+
+<section id="dashboard" class="section-py bg-2" style="min-height: 100vh; padding-top: calc(var(--nav-h) + 40px);">
+  <div class="container-xl">
+    
+    <div class="row g-5">
+      <div class="col-lg-3 col-md-4">
+        <div class="card-base" style="position: sticky; top: calc(var(--nav-h) + 20px);">
+          
+          <div class="text-center mb-4">
+            <img src="/media/images/profile/avatar-1.png" alt="User Avatar" class="team-avatar" style="width: 80px; height: 80px;" onerror="this.src='https://picsum.photos/100/100?random=50'">
+            <h3 style="font-family: var(--ff-body); font-size: 1.1rem; margin-bottom: 4px; color: var(--text-h);">Sarah Al-Rashid</h3>
+            <span class="tag" style="margin-bottom:0; font-size: 0.65rem;"><i class="fas fa-crown text-warning"></i> Elite Member</span>
+          </div>
+
+          <hr style="border-color: var(--border); margin: 20px 0;">
+
+          <nav class="dash-nav" style="display: flex; flex-direction: column; gap: 8px;">
+            <a href="#overview" class="dash-link active"><i class="fas fa-border-all"></i> Overview</a>
+            <a href="#bookings" class="dash-link"><i class="fas fa-ticket-alt"></i> My Bookings</a>
+            <a href="#visas" class="dash-link"><i class="fas fa-passport"></i> Visa Status</a>
+            <a href="#saved" class="dash-link"><i class="fas fa-heart"></i> Saved Packages</a>
+            <a href="#settings" class="dash-link"><i class="fas fa-cog"></i> Settings</a>
+            <a href="#" onclick="handleLogout()" class="dash-link text-danger mt-3" style="background: rgba(239, 68, 68, 0.05);"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col-lg-9 col-md-8">
+        
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <h1 class="sec-title mb-1" style="font-size: 2rem;">Welcome back, Sarah!</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Here is your travel summary and upcoming itineraries.</p>
+          </div>
+          <a href="/reservation/" class="btn-blue" style="padding: 10px 20px; font-size: 0.8rem;">
+            <i class="fas fa-plus"></i> New Booking
+          </a>
+        </div>
+
+        <div class="row g-4 mb-5">
+          <div class="col-sm-4">
+            <div class="card-base p-4 d-flex align-items-center gap-3">
+              <div class="icon-box" style="width: 48px; height: 48px; font-size: 1.1rem;"><i class="fas fa-plane"></i></div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Upcoming Trips</div>
+                <div style="font-family: var(--ff-head); font-size: 1.5rem; font-weight: 900; color: var(--text-h); line-height: 1;">2</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card-base p-4 d-flex align-items-center gap-3">
+              <div class="icon-box" style="width: 48px; height: 48px; font-size: 1.1rem; background: rgba(16, 185, 129, 0.1); color: var(--green);"><i class="fas fa-passport"></i></div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Active Visas</div>
+                <div style="font-family: var(--ff-head); font-size: 1.5rem; font-weight: 900; color: var(--text-h); line-height: 1;">1</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card-base p-4 d-flex align-items-center gap-3">
+              <div class="icon-box" style="width: 48px; height: 48px; font-size: 1.1rem; background: rgba(245, 158, 11, 0.1); color: var(--amber);"><i class="fas fa-coins"></i></div>
+              <div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Danah Points</div>
+                <div style="font-family: var(--ff-head); font-size: 1.5rem; font-weight: 900; color: var(--text-h); line-height: 1;">4,250</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="font-family: var(--ff-body); font-size: 1.2rem; font-weight: 700; color: var(--text-h); margin-bottom: 16px;">Upcoming Itineraries</h3>
+        
+        <div class="card-base mb-4" style="padding: 24px;">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--bg-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Emirates_logo.svg" alt="Emirates" style="width: 24px; height: 24px; object-fit: contain;">
+              </div>
+              <div>
+                <h5 style="margin: 0; font-family: var(--ff-body); font-size: 1rem; color: var(--text-h); font-weight: 700;">Riyadh (RUH) &rarr; Dubai (DXB)</h5>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Emirates Airlines • Flight EK 802 • Business Class</span>
+              </div>
+            </div>
+            <div class="pill-green" style="margin: 0;">Confirmed</div>
+          </div>
+          
+          <div class="row g-3" style="background: var(--bg-2); border-radius: 12px; padding: 16px; margin-top: 8px;">
+            <div class="col-4">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Departure</div>
+              <div style="font-weight: 700; color: var(--text-h); font-size: 0.9rem;">12 Aug, 08:45 AM</div>
+            </div>
+            <div class="col-4">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Arrival</div>
+              <div style="font-weight: 700; color: var(--text-h); font-size: 0.9rem;">12 Aug, 11:35 AM</div>
+            </div>
+            <div class="col-4 text-end">
+              <button class="btn-outline" style="padding: 8px 14px; font-size: 0.75rem;"><i class="fas fa-download"></i> E-Ticket</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-base" style="padding: 24px;">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <div style="width: 44px; height: 44px; border-radius: 10px; background: var(--bg-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Saudia_logo.svg" alt="Saudia" style="width: 24px; height: 24px; object-fit: contain;">
+              </div>
+              <div>
+                <h5 style="margin: 0; font-family: var(--ff-body); font-size: 1rem; color: var(--text-h); font-weight: 700;">Dubai (DXB) &rarr; Riyadh (RUH)</h5>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Saudia • Flight SV 551 • Business Class</span>
+              </div>
+            </div>
+            <div class="pill-green" style="margin: 0; background: rgba(59, 130, 246, 0.1); color: var(--blue);">Processing</div>
+          </div>
+          
+          <div class="row g-3" style="background: var(--bg-2); border-radius: 12px; padding: 16px; margin-top: 8px;">
+            <div class="col-4">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Departure</div>
+              <div style="font-weight: 700; color: var(--text-h); font-size: 0.9rem;">18 Aug, 02:15 PM</div>
+            </div>
+            <div class="col-4">
+              <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Arrival</div>
+              <div style="font-weight: 700; color: var(--text-h); font-size: 0.9rem;">18 Aug, 03:20 PM</div>
+            </div>
+            <div class="col-4 text-end">
+              <button class="btn-outline" style="padding: 8px 14px; font-size: 0.75rem; opacity: 0.5; cursor: not-allowed;" disabled>Pending</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

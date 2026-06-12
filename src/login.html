@@ -1,0 +1,90 @@
+---
+layout: base.njk
+title: Danah Travel – Login to Your Account
+description: Sign in to your Danah Travel account to manage bookings, view trip history, and access member-only deals.
+pageScript: /assets/js/login-page.js
+includeHomepageScript: false   # ← prevents index-page.js from loading
+---
+
+<!-- ============================================================
+     LOGIN SECTION (no extra navbar/footer – handled by base.njk)
+============================================================ -->
+<section class="login-section section-py">
+  <div class="container-xl">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="login-card">
+          <div class="brand text-center mb-4">
+            <div class="logo">Dan<span>ah</span></div>
+            <div class="brand-sub" data-i18n="login.brandSub">Travel & Tourism</div>
+          </div>
+
+          <div class="welcome-text text-center mb-4">
+            <h1 class="h3 fw-bold" data-i18n="login.welcomeTitle">Welcome back</h1>
+            <p class="text-muted" data-i18n="login.welcomeSub">Login to manage your trips & exclusive offers</p>
+          </div>
+
+          <form id="loginForm" method="post" action="/api/login" novalidate>
+            <div class="mb-3">
+              <label class="form-label fw-semibold" data-i18n="login.emailLabel">Email or Username</label>
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-envelope text-muted"></i></span>
+                <input type="email" class="form-control border-start-0 ps-0" id="loginEmail" data-i18n-placeholder="login.emailPlaceholder" placeholder="client@danahtravel.sa" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label class="form-label fw-semibold mb-0" data-i18n="login.passwordLabel">Password</label>
+                <a href="#" id="forgotPasswordLink" class="small text-primary" data-i18n="login.forgotLink">Forgot?</a>
+              </div>
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-end-0"><i class="fas fa-lock text-muted"></i></span>
+                <input type="password" class="form-control border-start-0 ps-0" id="loginPassword" data-i18n-placeholder="login.passwordPlaceholder" placeholder="••••••••" required>
+                <button class="btn btn-outline-secondary border-start-0" type="button" id="togglePassword">
+                  <i class="fas fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rememberMe">
+                <label class="form-check-label small" for="rememberMe" data-i18n="login.rememberMe">Remember me</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold" data-i18n="login.submitBtn">
+              <i class="fas fa-arrow-right-to-bracket me-2"></i>Login to Account
+            </button>
+          </form>
+
+          <div class="divider my-4 text-center position-relative">
+            <hr class="w-100">
+            <span class="px-3 bg-body position-relative small text-muted" data-i18n="login.dividerText">OR CONTINUE WITH</span>
+          </div>
+
+          <div class="social-login d-flex gap-3 mb-4">
+            <button class="btn btn-outline-secondary flex-fill" id="googleLoginBtn">
+              <i class="fab fa-google me-2"></i><span data-i18n="login.google">Google</span>
+            </button>
+            <button class="btn btn-outline-secondary flex-fill" id="facebookLoginBtn">
+              <i class="fab fa-facebook-f me-2"></i><span data-i18n="login.facebook">Facebook</span>
+            </button>
+            <button class="btn btn-outline-secondary flex-fill" id="appleLoginBtn">
+              <i class="fab fa-apple me-2"></i><span data-i18n="login.apple">Apple</span>
+            </button>
+          </div>
+
+          <div class="text-center small">
+			  <span data-i18n="login.signupTextPrefix">Don’t have an account?</span>
+			  <a href="/signup" class="fw-semibold text-primary" data-i18n="login.signupLink">Create free account</a>
+		  </div>
+          <div class="text-center mt-4 small text-muted" data-i18n="login.secureNote">
+            <i class="fas fa-shield-alt me-1"></i> Secure login • Protected by SSL
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

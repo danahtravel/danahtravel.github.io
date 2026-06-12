@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Request a reservation. Fill in your travel details and our experts will call you back within 2 hours.">
+  <meta name="keywords" content="travel, tourism, flights, visa, Saudi Arabia, Riyadh, tickets, tour packages, Danah, travel agency">
+  <meta name="author" content="Danah Travel & Tourism">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Danah | Reservation Request">
+  <meta property="og:description" content="Request a reservation. Fill in your travel details and our experts will call you back within 2 hours.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="theme-color" content="#3B82F6">
+  
+  <title>Danah | Reservation Request</title>
+
+  <link rel="icon" type="image/svg+xml" href="/media/images/logos/favicon.svg">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+
+<div id="preloader" role="status" aria-live="polite" aria-label="Loading Danah Travel">
+  <div class="pre-logo">Danah</div>
+  <div class="pre-bar"><div class="pre-fill"></div></div>
+  <div class="pre-label" data-i18n="preloader.label">Loading Experience…</div>
+</div>
+
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<a href="/#booking" id="sticky-cta" aria-label="Book a flight" data-i18n-aria-label="sticky.book">
+  <i class="fas fa-paper-plane"></i>
+  <span class="cta-label" data-i18n="sticky.book">Book a Flight</span>
+</a>
+
+<button id="btt" aria-label="Back to top" data-i18n-aria-label="btt"><i class="fas fa-arrow-up"></i></button>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox" data-i18n-aria-label="lightbox">
+  <img id="lb-img" src="" alt="">
+  <button class="lb-btn" id="lb-close" aria-label="Close" data-i18n-aria-label="lightbox.close"><i class="fas fa-times"></i></button>
+  <button class="lb-btn" id="lb-prev" aria-label="Previous image" data-i18n-aria-label="lightbox.prev"><i class="fas fa-chevron-left"></i></button>
+  <button class="lb-btn" id="lb-next" aria-label="Next image" data-i18n-aria-label="lightbox.next"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<nav id="nav" role="navigation" aria-label="Primary navigation" data-i18n-aria-label="nav.aria">
+  <div class="nav-wrap">
+    <!-- ============================================================
+		 BRANDING LOGO ENGINE
+	============================================================ -->
+	<a href="/#hero" class="logo-link">
+	  <img src="/media/images/logos/logo.svg" alt="Danah Travel" class="logo-img">
+	  <div class="logo-texts">
+		<span class="logo-name">DAN<em>AH</em><sup style="font-size:.45em; color:var(--text-muted); vertical-align:super;">™</sup></span>
+		<span class="logo-sub" data-i18n="logo_sub">Travel & Tourism</span>
+	  </div>
+	</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="/#hero" data-i18n="nav.home">Home</a></li>
+      <li><a href="/#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="/#about" data-i18n="nav.about">About</a></li>
+      <li><a href="/#portfolio" data-i18n="nav.destinations">Destinations</a></li>
+      <li><a href="/#pricing" data-i18n="nav.pricing">Pricing</a></li>
+      <li><a href="/#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <div class="lang-switcher" id="lang-switcher" style="display:flex; align-items:center; gap:6px;">
+        <div class="lang-orb" onclick="switchLang('en')" id="lang-en" title="English" data-i18n-title="lang.en" style="width:28px; height:28px; border-radius:50%; overflow:hidden; cursor:pointer; border:2px solid transparent;">
+          <img src="/media/images/GB.png" alt="EN" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="lang-orb" onclick="switchLang('ar')" id="lang-ar" title="Arabic" data-i18n-title="lang.ar" style="width:28px; height:28px; border-radius:50%; overflow:hidden; cursor:pointer; border:2px solid transparent;">
+          <img src="/media/images/Ar_1.png" alt="AR" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+      </div>
+
+      <div id="cart-icon" onclick="toggleCart()" style="display:none; position:relative; cursor:pointer; color:var(--text-p); font-size:1.1rem; padding:6px;">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count" style="display:none; position:absolute; top:-4px; right:-8px; background:var(--blue); color:#fff; font-size:.65rem; font-weight:700; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;">0</span>
+      </div>
+
+      <div id="user-profile-section" class="user-status-hidden" style="display:none; align-items:center; gap:10px;">
+        <a href="/profile.html" class="user-orb" style="display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--text-h); font-weight:600; font-size:.85rem;">
+          <i class="fas fa-user-circle" style="font-size:1.4rem; color:var(--blue);"></i>
+          <span id="user-display-name">Client</span>
+        </a>
+        <button onclick="handleLogout()" class="logout-link" style="background:none; border:none; color:var(--text-muted); font-size:.75rem; cursor:pointer; font-weight:500; padding:4px 8px; border-radius:6px;" data-i18n="nav.logout">Logout</button>
+      </div>
+
+      <button class="btn-theme" id="theme-toggle" aria-label="Toggle dark mode" data-i18n-aria-label="theme.toggle">
+        <i class="fas fa-moon" id="theme-icon"></i>
+      </button>
+
+      <a href="/reservation.html" class="btn-blue" style="padding:9px 18px; font-size:.84rem;">
+        <i class="fas fa-calendar-check"></i> <span data-i18n="nav.reservation">Reserve</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" data-i18n-aria-label="nav.menuOpen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" data-i18n-aria-label="nav.mobileAria">
+  <a href="/#hero" class="mob-link" data-i18n="nav.home">Home</a>
+  <a href="/#services" class="mob-link" data-i18n="nav.services">Services</a>
+  <a href="/#about" class="mob-link" data-i18n="nav.about">About</a>
+  <a href="/#portfolio" class="mob-link" data-i18n="nav.destinations">Destinations</a>
+  <a href="/#pricing" class="mob-link" data-i18n="nav.pricing">Pricing</a>
+  <a href="/#contact" class="mob-link" data-i18n="nav.contact">Contact</a>
+  <a href="/reservation.html" class="mob-link btn-blue" style="text-align:center; justify-content:center; margin-top:12px;">
+    <i class="fas fa-calendar-check"></i> <span data-i18n="nav.reservation">Reserve Now</span>
+  </a>
+</nav>
+
+<main>
+  
+<!-- ==================== HERO (Reservation Focus) ==================== -->
+<section id="reservation-hero" class="section-py" style="background: linear-gradient(135deg, #0B1426 0%, #0F2050 100%); margin-top: var(--nav-h);">
+  <div class="container-xl">
+    <div class="text-center py-5">
+      <span class="tag reveal" style="background: rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.2);">
+        <i class="fas fa-calendar-check"></i> <span data-i18n="reservation.hero.tag">Secure Your Journey</span>
+      </span>
+      <h1 class="display-3 fw-bold text-white mt-3 reveal d1" data-i18n="reservation.hero.title">Request a Reservation</h1>
+      <p class="lead text-white-70 mx-auto" style="max-width: 700px;" data-i18n="reservation.hero.desc">Fill in your travel details and a Danah consultant will call you back within 2 hours to confirm availability and pricing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MULTI-STEP RESERVATION FORM ==================== -->
+<section class="section-py bg-2">
+  <div class="container-xl">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="booking-wrap" style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem;">
+          
+          <!-- Step Indicators -->
+          <div class="res-steps mb-5">
+            <div class="res-step" data-step="1">
+              <div class="res-step-num">1</div>
+              <span data-i18n="reservation.step1.personal">Personal Info</span>
+            </div>
+            <div class="res-step" data-step="2">
+              <div class="res-step-num">2</div>
+              <span data-i18n="reservation.step2.trip">Trip Details</span>
+            </div>
+            <div class="res-step" data-step="3">
+              <div class="res-step-num">3</div>
+              <span data-i18n="reservation.step3.confirm">Confirm</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Personal Information -->
+          <div id="step-1" class="res-step-content active">
+            <h3 class="mb-4" data-i18n="reservation.form.personal_title">Personal Information</h3>
+            <form id="reservation-step1" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.fullName">Full Name</label>
+                  <input type="text" class="form-control" id="res-fullname" data-i18n-placeholder="reservation.fullName_placeholder" placeholder="e.g. Mohammed Al-Qahtani" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.phone">Phone Number</label>
+                  <input type="tel" class="form-control" id="res-phone" data-i18n-placeholder="reservation.phone_placeholder" placeholder="+966 5X XXX XXXX" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.email">Email Address</label>
+                  <input type="email" class="form-control" id="res-email" data-i18n-placeholder="reservation.email_placeholder" placeholder="you@example.com" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.preferred_contact">Preferred Contact Method</label>
+                  <select class="form-select" id="res-contact-method">
+                    <option value="phone" data-i18n="reservation.contact_phone">Phone</option>
+                    <option value="whatsapp" data-i18n="reservation.contact_whatsapp">WhatsApp</option>
+                    <option value="email" data-i18n="reservation.contact_email">Email</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mt-4 d-flex justify-content-end">
+                <button type="button" class="btn-blue next-step" data-next="2"><span data-i18n="reservation.btn_next">Next</span> <i class="fas fa-arrow-right ms-2"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Trip Details -->
+          <div id="step-2" class="res-step-content" style="display: none;">
+            <h3 class="mb-4" data-i18n="reservation.form.trip_title">Trip Details</h3>
+            <form id="reservation-step2" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.destination">Destination</label>
+                  <input type="text" class="form-control" id="res-destination" data-i18n-placeholder="reservation.destination_placeholder" placeholder="e.g. Paris, France" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.travelDate">Travel Date</label>
+                  <input type="date" class="form-control" id="res-travel-date" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.returnDate">Return Date (optional)</label>
+                  <input type="date" class="form-control" id="res-return-date">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.travellers">Number of Travellers</label>
+                  <select class="form-select" id="res-travellers" required>
+                    <option value="" data-i18n="reservation.select">Select</option>
+                    <option value="1" data-i18n="reservation.pax1">1 Person</option>
+                    <option value="2" data-i18n="reservation.pax2">2 People</option>
+                    <option value="3-5" data-i18n="reservation.pax3">3–5 People</option>
+                    <option value="6-10" data-i18n="reservation.pax4">6–10 People</option>
+                    <option value="10+" data-i18n="reservation.pax5">Group 10+</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.packageType">Package Type</label>
+                  <select class="form-select" id="res-package">
+                    <option value="economy" data-i18n="reservation.pkg1">Economy Package</option>
+                    <option value="business" data-i18n="reservation.pkg2">Business Package</option>
+                    <option value="premium" data-i18n="reservation.pkg3">Premium Package</option>
+                    <option value="custom" data-i18n="reservation.pkg4">Custom / Bespoke</option>
+                    <option value="flight" data-i18n="reservation.pkg5">Flight Only</option>
+                    <option value="visa" data-i18n="reservation.pkg6">Visa Only</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.budget">Approximate Budget</label>
+                  <select class="form-select" id="res-budget">
+                    <option value="<2000" data-i18n="reservation.budget1">Below SAR 2,000</option>
+                    <option value="2000-5000" data-i18n="reservation.budget2">SAR 2,000 – 5,000</option>
+                    <option value="5000-10000" data-i18n="reservation.budget3">SAR 5,000 – 10,000</option>
+                    <option value="10000-20000" data-i18n="reservation.budget4">SAR 10,000 – 20,000</option>
+                    <option value=">20000" data-i18n="reservation.budget5">SAR 20,000+</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" data-i18n="reservation.notes">Special Requests or Notes</label>
+                  <textarea class="form-control" id="res-notes" data-i18n-placeholder="reservation.notes_placeholder" placeholder="Any special requirements, dietary needs, preferred airlines, hotel preferences…" rows="4"></textarea>
+                </div>
+              </div>
+              <div class="mt-4 d-flex justify-content-between">
+                <button type="button" class="btn-outline prev-step" data-prev="1"><i class="fas fa-arrow-left me-2"></i> <span data-i18n="reservation.btn_prev">Back</span></button>
+                <button type="button" class="btn-blue next-step" data-next="3"><span data-i18n="reservation.btn_review">Review</span> <i class="fas fa-arrow-right ms-2"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 3: Confirmation & Submit -->
+          <div id="step-3" class="res-step-content" style="display: none;">
+            <h3 class="mb-4" data-i18n="reservation.form.confirm_title">Confirm Your Request</h3>
+            <div id="reservation-summary" class="mb-4 p-3 bg-2 rounded"></div>
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="agree-terms" required>
+              <label class="form-check-label" for="agree-terms" data-i18n="reservation.agree_terms">I agree to the <a href="#" data-i18n="footer.terms">Terms of Service</a> and <a href="#" data-i18n="footer.privacy">Privacy Policy</a>.</label>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn-outline prev-step" data-prev="2"><i class="fas fa-arrow-left me-2"></i> <span data-i18n="reservation.btn_prev">Back</span></button>
+              <button type="button" id="submit-reservation" class="btn-blue"><i class="fas fa-paper-plane me-2"></i> <span data-i18n="reservation.submit">Submit Reservation Request</span></button>
+            </div>
+          </div>
+
+          <div class="form-msg mt-4" id="res-msg" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="footer" role="contentinfo">
+  <div class="container-xl">
+    <div class="footer-top">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="foot-logo">Dan<em>ah</em></div>
+          <p class="foot-desc" data-i18n="footer.desc">
+            Your trusted travel partner in downtown Riyadh since 2016 — connecting Saudi Arabia to the world through exceptional service and unbeatable value.
+          </p>
+          <div class="foot-socials">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter / X"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <div class="foot-head" data-i18n="footer.services">Services</div>
+          <ul class="foot-links">
+            <li><a href="/#booking"><i class="fas fa-angle-right"></i><span data-i18n="footer.booking">Flight Booking</span></a></li>
+            <li><a href="/#services"><i class="fas fa-angle-right"></i><span data-i18n="footer.visa">Visa Services</span></a></li>
+            <li><a href="/#pricing"><i class="fas fa-angle-right"></i><span data-i18n="footer.tours">Tour Packages</span></a></li>
+            <li><a href="/#services"><i class="fas fa-angle-right"></i><span data-i18n="footer.hotel">Hotel Booking</span></a></li>
+            <li><a href="/#services"><i class="fas fa-angle-right"></i><span data-i18n="footer.corp">Corporate Travel</span></a></li>
+            <li><a href="/reservation.html"><i class="fas fa-angle-right"></i><span data-i18n="footer.reservations">Reservations</span></a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-6">
+          <div class="foot-head" data-i18n="footer.topDests">Top Destinations</div>
+          <ul class="foot-links">
+            <li><a href="/#portfolio"><i class="fas fa-angle-right"></i>Dubai, UAE</a></li>
+            <li><a href="/#portfolio"><i class="fas fa-angle-right"></i>Istanbul, Turkey</a></li>
+            <li><a href="/#portfolio"><i class="fas fa-angle-right"></i>London, UK</a></li>
+            <li><a href="/#portfolio"><i class="fas fa-angle-right"></i>Paris, France</a></li>
+            <li><a href="/#portfolio"><i class="fas fa-angle-right"></i>Maldives</a></li>
+            <li><a href="/#portfolio"><i class="fas fa-angle-right"></i>Tokyo, Japan</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="foot-head" data-i18n="footer.newsletter">Stay in the Loop</div>
+          <p style="font-size:.855rem;color:rgba(255,255,255,.4);margin-bottom:16px;line-height:1.65;" data-i18n="footer.newsletter_desc">
+            Subscribe for exclusive deals, early-bird offers, and travel inspiration delivered directly to your inbox.
+          </p>
+          <div class="nl-wrap">
+            <input type="email" class="nl-input" data-i18n-placeholder="footer.placeholder" placeholder="Enter your email address…" aria-label="Email for newsletter">
+            <button class="nl-btn" data-i18n="footer.subscribe">Subscribe</button>
+          </div>
+          <p style="font-size:.74rem;color:rgba(255,255,255,.25);margin-top:10px;" data-i18n="footer.nospam">
+            No spam, ever. Unsubscribe at any time.
+          </p>
+          <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:7px 12px;border-radius:8px;font-size:.72rem;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px;">
+              <i class="fas fa-shield-halved" style="color:var(--blue);"></i> <span data-i18n="footer.sta">STA Licensed</span>
+            </div>
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:7px 12px;border-radius:8px;font-size:.72rem;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px;">
+              <i class="fas fa-certificate" style="color:var(--amber);"></i> <span data-i18n="footer.iata">IATA Accredited</span>
+            </div>
+            <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:7px 12px;border-radius:8px;font-size:.72rem;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px;">
+              <i class="fas fa-lock" style="color:var(--green);"></i> <span data-i18n="footer.ssl">SSL Secured</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <div class="foot-copy" data-i18n="footer.copy">
+        © 2026 Danah Travel & Tourism. All rights reserved. | STA License #STA-RUH-2016-0442
+      </div>
+      <div class="foot-legal">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+        <a href="#" data-i18n="footer.cookies">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/api.js"></script>
+<script src="/assets/js/core.js"></script>
+
+
+
+
+
+
+  <script src="/assets/js/reservation-page.js"></script>
+
+</html>

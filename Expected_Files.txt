@@ -1,0 +1,93 @@
+Good — this is a real jump from the single-page mockup to an actual production stack (Eleventy + Firebase Functions + Firestore), and you've already got a solid skeleton: pages for admin/dashboard/login/reservation exist, `assets/js/reservation-page.js` is already 77KB, and you've got the Bootstrap RTL build pulled in too (handy if Danah serves Arabic-speaking customers — worth deciding early whether `rooms`/`offers` get `_ar` fields from day one).
+
+Before layering on the reservation system, a few things in the current tree need attention first:
+
+- `.gitignore` is empty — `node_modules/`, `.env`, `debug/`, `*.log`, `Chrome_DevTool_Records/`, and `all_files.txt` should all be excluded before this hits a public GitHub repo.
+- `.env` is empty and currently unprotected by `.gitignore` — fix the ignore file before you put any Firebase keys in there.
+- `functions/index.js`, `functions/package.json`, `functions/routes/booking.js`, `functions/routes/notify.js`, and `data/schema_reservation.json` are all 0 bytes — these are exactly the files the reservation system needs.
+- No root `package.json` — Eleventy needs this to run via `npm`/`npx`.
+- No `firebase.json` / `.firebaserc` — without these, `firebase deploy` has nothing to target.
+
+Here's the target structure layered on top of what you have, for offers, notifications, product rooms, and the full booking flow:
+
+```
+Danah Travel/
+├── .firebaserc                    NEW – links repo to your Firebase project id(s)
+├── firebase.json                  NEW – hosting + functions + firestore + emulator config
+├── firestore.rules                NEW – security rules (must exist before going live)
+├── firestore.indexes.json         NEW – composite indexes for reservation queries
+├── storage.rules                  NEW – only if room/offer images go in Firebase Storage
+├── .gitignore                     FIX – currently empty
+├── .env.example                   NEW – documents required vars, no real values
+├── .env                           FIX – currently empty (gitignore first)
+├── package.json                   MISSING – root deps: eleventy (+ firebase-tools as devDep)
+├── .eleventy.js                   existing – may need a passthrough rule for new assets
+│
+├── .github/workflows/
+│   ├── firebase-hosting-merge.yml          NEW – build + deploy to live on push to main
+│   └── firebase-hosting-pull-request.yml   NEW – preview channel per PR
+│
+├── data/                           (Firestore document-shape contracts — not 11ty data)
+│   ├── schema_reservation.json    FIX – currently empty
+│   ├── schema_offer.json          NEW
+│   ├── schema_room.json           NEW   ← your "product room"
+│   ├── schema_notification.json   NEW
+│   └── schema_user.json           NEW
+│
+├── functions/
+│   ├── package.json               FIX – firebase-admin, firebase-functions deps
+│   ├── index.js                   FIX – re-exports everything below
+│   ├── lib/
+│   │   ├── admin.js                NEW – firebase-admin init + shared db ref
+│   │   └── validate.js             NEW – validates payloads against /data schemas
+│   └── routes/
+│       ├── booking.js              FIX – createReservation + onReservationWrite trigger
+│       ├── notify.js               FIX – writes /notifications docs, optional email
+│       ├── offers.js               NEW – CRUD + scheduled expiry for offer cards
+│       └── rooms.js                NEW – live availability checks
+│
+└── src/
+    ├── _data/
+    │   ├── offers.json              NEW – static/fallback offer data for build-time cards
+    │   └── rooms.json                NEW – product/room catalog → drives pagination
+    ├── _includes/
+    │   ├── base.njk                  existing
+    │   └── partials/
+    │       ├── offer-card.njk         NEW
+    │       ├── room-card.njk           NEW
+    │       ├── notification-bell.njk   NEW
+    │       └── reservation-modal.njk   NEW – shared booking widget
+    ├── index.html                     existing – add offer-card grid + bell
+    ├── reservation.html                existing – wire to Firestore writes
+    ├── packages_pricing.html           existing – becomes the offers listing page
+    ├── rooms.html                      NEW – paginated → /rooms/<slug>/index.html
+    ├── notifications.html              NEW – or fold into dashboard
+    ├── dashboard.html                   existing – admin: manage offers/rooms/reservations
+    ├── login.html                       existing
+    ├── contact.html                     existing
+    └── assets/js/
+        ├── firebase-init.js            NEW – initializeApp(), exports auth/db
+        ├── core.js                      existing
+        ├── reservation-page.js          existing – extend: writeReservation()
+        ├── packages-pricing-page.js      existing – extend: render live offers
+        ├── room-page.js                  NEW – product room detail page logic
+        ├── notifications.js               NEW – onSnapshot + bell badge
+        └── admin/
+            ├── offers-admin.js            NEW
+            ├── rooms-admin.js              NEW
+            └── reservations-admin.js       NEW
+```
+
+On the Firestore side, five collections cover everything you listed. `rooms` is the catalog — each doc is a bookable product (slug, title, type, price, images, capacity/availability) and `src/rooms.html` paginates over `src/_data/rooms.json` at build time to generate one detail page per item, while live availability is still checked against Firestore at request time. `offers` references a `roomId`, carries discount info and a validity window, and is what renders as the offer cards on the homepage and the packages/offers page. `reservations` is the central booking record — room reference, user (or guest) contact, dates, status (`pending` → `confirmed` → `completed`/`cancelled`), and a price snapshot. `notifications` is a per-user feed written by Cloud Functions in response to reservation events, read live via `onSnapshot`. `users` ties Firebase Auth uids to a role (`customer`/`admin`) so the dashboard and security rules can branch on it.
+
+The flow ties together like this: a visitor browses `rooms.html`, clicks into a product room page, `room-page.js` shows live availability plus any matching `offers` badge. Submitting the reservation modal calls a callable function in `routes/booking.js`, which validates the payload against `schema_reservation.json`, checks availability, and writes to `reservations`. That write triggers `onReservationCreate`, which (via `notify.js`) drops a doc into `notifications` for both the customer and an admin feed — `notifications.js` on the client and `reservations-admin.js` in the dashboard both pick it up in real time. Using Firebase Auth with anonymous sign-in for guests means even non-account visitors get a notification thread without forcing a login wall.
+
+For deployment, the standard pairing is GitHub Actions + Firebase Hosting: the merge workflow runs `npx @11ty/eleventy` then deploys `public/` via the Firebase GitHub Action (service account JSON as a repo secret), with a separate step or workflow for `firebase deploy --only functions,firestore` since those change less often. One more thing worth flagging now: Firebase web config (apiKey, projectId, etc.) isn't actually secret — it's fine in client JS, protected by `firestore.rules` instead — but anything `notify.js` needs for email (SMTP/SendGrid keys) should go through `firebase functions:secrets:set`, not `.env`.
+
+Given the size here, I'd suggest starting with the unblocking pieces — `firebase.json`, `.firebaserc`, `firestore.rules`, and filling in the empty `functions/` files — since nothing else can be tested without them. Want me to draft those first?
+
+The third piece — HR — is the part that changes the shape of everything else, so let's start there conceptually and work outward. Right now `users` only needs to describe customers. The moment you add employees, `users` becomes a shared identity table for *anyone with a login*, and `role` becomes the field that decides which extension document — `customers/{uid}` or `employees/{employeeId}` — actually applies. Everything below (the admin directory, the Storage layout, the HR collections) hangs off that one decision.
+
+One foundational point before the trees: with Eleventy + Firebase Hosting, every file under `public/` is publicly servable HTML — there's no server-side route guard the way there would be with an Express admin panel. So `src/admin/**` pages are just UI shells (markup + a script tag). The real access boundary is Firebase Auth custom claims + Firestore/Storage security rules, checked when the page's JS talks to the database. That's worth keeping in mind especially for payroll and Iqama data.
+
+Here's how the new HR pieces sit relative to what's already planned for reservations/notifications:

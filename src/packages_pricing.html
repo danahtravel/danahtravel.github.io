@@ -1,0 +1,649 @@
+---
+layout: base.njk
+title: Danah Travel – Packages and Pricings
+description: figure out and calculate suitable prices for your trip at Danah Travel manage bookings, view trip history, and access member-only deals.
+pageScript: /assets/js/packages-pricing-page.js
+includeHomepageScript: false   # ← prevents index-page.js from loading
+---
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="pricing-hero" aria-label="Packages and Pricing" data-i18n-aria-label="packages.hero.aria">
+  <canvas class="pricing-hero-canvas" id="hero-canvas"></canvas>
+  <div class="container-xl inner">
+    <nav aria-label="Breadcrumb" style="margin-bottom:20px;">
+      <ol style="list-style:none;display:flex;gap:8px;font-size:.78rem;color:rgba(255,255,255,.4);">
+        <li><a href="index.html" style="color:rgba(255,255,255,.4);text-decoration:none;" data-i18n="packages.breadcrumb.home">Home</a></li>
+        <li style="opacity:.4;" data-i18n="packages.breadcrumb.sep">›</li>
+        <li style="color:rgba(255,255,255,.7);font-weight:600;" data-i18n="packages.breadcrumb.current">Packages & Pricing</li>
+      </ol>
+    </nav>
+    <div class="hero-eyebrow" data-i18n="packages.hero.eyebrow"><i class="fas fa-tags"></i> Transparent Pricing</div>
+    <h1 class="hero-pg-title" data-i18n-html="packages.hero.title">
+      The Right Package<br>for <span class="hl">Every Journey</span>
+    </h1>
+    <p class="hero-pg-sub" data-i18n="packages.hero.sub">
+      All-inclusive travel packages with zero hidden fees — from economy getaways to
+      premium first-class experiences. Departing from Riyadh to the world.
+    </p>
+    <div class="hero-quick-nav">
+      <a href="#packages"    class="hqn-btn" data-i18n="packages.quicknav.packages"><i class="fas fa-box-open"></i> Packages</a>
+      <a href="#calculator"  class="hqn-btn" data-i18n="packages.quicknav.calculator"><i class="fas fa-calculator"></i> Price Calculator</a>
+      <a href="#destinations" class="hqn-btn" data-i18n="packages.quicknav.destinations"><i class="fas fa-globe"></i> Destination Prices</a>
+      <a href="#addons"      class="hqn-btn" data-i18n="packages.quicknav.addons"><i class="fas fa-plus-circle"></i> Add-Ons</a>
+      <a href="#membership"  class="hqn-btn" data-i18n="packages.quicknav.membership"><i class="fas fa-crown"></i> Membership</a>
+    </div>
+    <div class="hero-trust-strip">
+      <div class="hts-item">
+        <div class="hts-icon"><i class="fas fa-shield-halved"></i></div>
+        <div><div class="hts-val" data-i18n="packages.trust.priceMatch.value">100%</div><div class="hts-lbl" data-i18n="packages.trust.priceMatch.label">Price Match Guarantee</div></div>
+      </div>
+      <div class="hts-item">
+        <div class="hts-icon"><i class="fas fa-rotate-left"></i></div>
+        <div><div class="hts-val" data-i18n="packages.trust.cancellation.value">Free</div><div class="hts-lbl" data-i18n="packages.trust.cancellation.label">Cancellation (48 hrs)</div></div>
+      </div>
+      <div class="hts-item">
+        <div class="hts-icon"><i class="fas fa-lock"></i></div>
+        <div><div class="hts-val" data-i18n="packages.trust.ssl.value">256-bit</div><div class="hts-lbl" data-i18n="packages.trust.ssl.label">SSL Encryption</div></div>
+      </div>
+      <div class="hts-item">
+        <div class="hts-icon"><i class="fas fa-headset"></i></div>
+        <div><div class="hts-val" data-i18n="packages.trust.support.value">24/7</div><div class="hts-lbl" data-i18n="packages.trust.support.label">Expert Support</div></div>
+      </div>
+      <div class="hts-item">
+        <div class="hts-icon"><i class="fas fa-passport"></i></div>
+        <div><div class="hts-val" data-i18n="packages.trust.visa.value">98.4%</div><div class="hts-lbl" data-i18n="packages.trust.visa.label">Visa Approval Rate</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE STRIP -->
+<div class="features-strip">
+  <div class="container-xl">
+    <div class="fs-grid">
+      <div class="fs-item"><div class="fs-icon"><i class="fas fa-tag"></i></div><div><div class="fs-title" data-i18n="packages.feature1.title">Best Price Guaranteed</div><div class="fs-desc" data-i18n="packages.feature1.desc">We match any comparable quote</div></div></div>
+      <div class="fs-item"><div class="fs-icon"><i class="fas fa-bolt"></i></div><div><div class="fs-title" data-i18n="packages.feature2.title">Instant E-Tickets</div><div class="fs-desc" data-i18n="packages.feature2.desc">Confirmed in minutes</div></div></div>
+      <div class="fs-item"><div class="fs-icon"><i class="fas fa-plane"></i></div><div><div class="fs-title" data-i18n="packages.feature3.title">85+ Destinations</div><div class="fs-desc" data-i18n="packages.feature3.desc">All major airlines & routes</div></div></div>
+      <div class="fs-item"><div class="fs-icon"><i class="fas fa-star"></i></div><div><div class="fs-title" data-i18n="packages.feature4.title">4.9★ Rated Agency</div><div class="fs-desc" data-i18n="packages.feature4.desc">12,000+ happy clients</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PACKAGES
+============================================================ -->
+<section id="packages" class="section-py">
+  <div class="container-xl">
+    <div class="text-center mb-2">
+      <span class="pg-tag" data-i18n="packages.section.tag"><i class="fas fa-box-open"></i> Our Packages</span>
+      <h2 class="pg-title" data-i18n="packages.section.title">All-Inclusive Travel Packages</h2>
+      <p class="pg-sub" data-i18n="packages.section.sub">Every package includes flights, accommodation, and transfers. No surprises at checkout.</p>
+    </div>
+
+    <div class="compare-toggle-bar">
+      <div class="compare-switch" id="pkg-period">
+        <button class="csw-btn on" data-period="7" data-i18n="packages.nights.7">7 Nights</button>
+        <button class="csw-btn"    data-period="10" data-i18n="packages.nights.10">10 Nights</button>
+        <button class="csw-btn"    data-period="14" data-i18n="packages.nights.14">14 Nights</button>
+      </div>
+      <span class="annual-badge" data-i18n-html="packages.annualBadge"><i class="fas fa-fire me-1"></i>Book before Aug 31 → save 15%</span>
+    </div>
+
+    <!-- 3 package cards -->
+    <div class="row g-4 mb-2">
+      <!-- Economy -->
+      <div class="col-md-6 col-lg-4">
+        <div class="price-card reveal">
+          <div class="icon-box mb-3"><i class="fas fa-plane"></i></div>
+          <div class="price-name" data-i18n="packages.economy.name">Economy Explorer</div>
+          <div class="price-val"><sup>SAR </sup><span class="pkg-price" data-7="990" data-10="1390" data-14="1790">990</span></div>
+          <div class="price-val" style="font-size:.75rem;font-weight:600;color:var(--text-muted);font-family:var(--ff-body);margin-top:4px;" data-i18n-html="packages.economy.perPersonNights">per person · <span class="pkg-nights">7</span> nights</div>
+          <p class="price-desc" data-i18n="packages.economy.desc">Perfect for solo travellers and couples exploring popular Gulf and regional destinations on a smart budget.</p>
+          <ul class="price-feats">
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.economy.feats.flights">Economy class flights (2 checked bags)</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.economy.feats.hotel">3-star hotel accommodation</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.economy.feats.transfers">Shared airport transfers</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.economy.feats.insurance">Basic travel insurance</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.economy.feats.support">24/7 customer support</span></li>
+            <li><i class="fas fa-times pf-icon no"></i><span style="color:var(--text-muted);" data-i18n="packages.economy.feats.visa">Visa processing</span></li>
+            <li><i class="fas fa-times pf-icon no"></i><span style="color:var(--text-muted);" data-i18n="packages.economy.feats.tours">Guided tours</span></li>
+            <li><i class="fas fa-times pf-icon no"></i><span style="color:var(--text-muted);" data-i18n="packages.economy.feats.meals">Meals included</span></li>
+          </ul>
+          <a href="index.html#booking" class="btn-pf btn-pf-outline" data-i18n="packages.economy.btn">Book Economy <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+
+      <!-- Business (Featured) -->
+      <div class="col-md-6 col-lg-4">
+        <div class="price-card feat reveal d1">
+          <div class="price-pop" data-i18n="packages.business.popular"><i class="fas fa-star me-1"></i> Most Popular</div>
+          <div class="icon-box mb-3" style="background:var(--blue);color:#fff;"><i class="fas fa-briefcase"></i></div>
+          <div class="price-name" data-i18n="packages.business.name">Business Traveller</div>
+          <div class="price-val"><sup>SAR </sup><span class="pkg-price" data-7="2490" data-10="3290" data-14="4190">2,490</span></div>
+          <div class="price-val" style="font-size:.75rem;font-weight:600;color:var(--text-muted);font-family:var(--ff-body);margin-top:4px;" data-i18n-html="packages.business.perPersonNights">per person · <span class="pkg-nights">7</span> nights</div>
+          <p class="price-desc" data-i18n="packages.business.desc">The ideal balance of comfort and value for families and frequent travellers wanting the full experience.</p>
+          <ul class="price-feats">
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.business.feats.flights">Business class flights (30kg bags)</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.business.feats.hotel">5-star hotel accommodation</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.business.feats.transfers">Private airport transfers</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.business.feats.insurance">Premium travel insurance</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.business.feats.visa">Visa processing included</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.business.feats.tours">2 guided city tours</span></li>
+            <li><i class="fas fa-star pf-icon star"></i><span data-i18n="packages.business.feats.meals">Breakfast & dinner daily</span></li>
+            <li><i class="fas fa-times pf-icon no"></i><span style="color:var(--text-muted);" data-i18n="packages.business.feats.lounge">Airport lounge access</span></li>
+          </ul>
+          <a href="index.html#booking" class="btn-pf btn-pf-fill" data-i18n="packages.business.btn">Book Business <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="col-md-6 col-lg-4">
+        <div class="price-card reveal d2">
+          <div class="icon-box mb-3"><i class="fas fa-crown"></i></div>
+          <div class="price-name" data-i18n="packages.premium.name">Premium Elite</div>
+          <div class="price-val"><sup>SAR </sup><span class="pkg-price" data-7="5200" data-10="7000" data-14="9200">5,200</span></div>
+          <div class="price-val" style="font-size:.75rem;font-weight:600;color:var(--text-muted);font-family:var(--ff-body);margin-top:4px;" data-i18n-html="packages.premium.perPersonNights">per person · <span class="pkg-nights">7</span> nights</div>
+          <p class="price-desc" data-i18n="packages.premium.desc">Total luxury from door to door. First-class flights, five-star resorts, and a personal concierge dedicated to every detail.</p>
+          <ul class="price-feats">
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.premium.feats.flights">First class flights (40kg bags)</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.premium.feats.hotel">Luxury resort suite</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.premium.feats.transfers">Limousine transfers</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.premium.feats.insurance">VIP comprehensive insurance</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.premium.feats.visa">Express visa processing</span></li>
+            <li><i class="fas fa-check pf-icon yes"></i><span data-i18n="packages.premium.feats.tours">Unlimited private tours</span></li>
+            <li><i class="fas fa-star pf-icon star"></i><span data-i18n="packages.premium.feats.meals">All meals, drinks & minibar</span></li>
+            <li><i class="fas fa-star pf-icon star"></i><span data-i18n="packages.premium.feats.lounge">Airport lounge access (worldwide)</span></li>
+          </ul>
+          <a href="index.html#booking" class="btn-pf btn-pf-outline" data-i18n="packages.premium.btn">Book Premium <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compare toggle -->
+    <div class="text-center">
+      <button class="compare-toggle-btn" id="compare-btn" onclick="toggleCompare()" data-i18n="packages.compareBtn">
+        <i class="fas fa-table-list"></i> Compare All Features
+        <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="compare-table-wrap" id="compare-table">
+      <div class="table-responsive" style="margin-top:28px;">
+        <table class="ctable">
+          <thead>
+            <tr>
+              <th style="width:38%;" data-i18n="packages.compare.feature">Feature</th>
+              <th data-i18n="packages.compare.economy">Economy</th>
+              <th class="feat-col" data-i18n="packages.compare.business">Business</th>
+              <th data-i18n="packages.compare.premium">Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="cat-row"><td colspan="4" data-i18n="packages.compare.cat.flights">✈️ Flights & Transport</td></tr>
+            <tr><td data-i18n="packages.compare.cabin">Cabin class</td><td data-i18n="packages.compare.cabin_economy">Economy</td><td class="feat-val" data-i18n="packages.compare.cabin_business">Business</td><td class="ct-gold" data-i18n="packages.compare.cabin_first">First Class</td></tr>
+            <tr><td data-i18n="packages.compare.baggage">Checked baggage</td><td data-i18n="packages.compare.baggage_economy">20 kg</td><td class="feat-val" data-i18n="packages.compare.baggage_business">30 kg</td><td class="ct-gold" data-i18n="packages.compare.baggage_premium">40 kg</td></tr>
+            <tr><td data-i18n="packages.compare.seat">Seat selection</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-check ct-check"></i></td><td class="ct-gold" data-i18n="packages.compare.seat_priority">Priority</td></tr>
+            <tr><td data-i18n="packages.compare.lounge">Airport lounge</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-times ct-x"></i></td><td class="ct-gold"><i class="fas fa-check"></i> <span data-i18n="packages.compare.lounge_worldwide">Worldwide</span></td></tr>
+            <tr><td data-i18n="packages.compare.transfer">Airport transfer type</td><td data-i18n="packages.compare.transfer_shared">Shared shuttle</td><td class="feat-val" data-i18n="packages.compare.transfer_private">Private car</td><td class="ct-gold" data-i18n="packages.compare.transfer_limo">Limousine</td></tr>
+            <tr><td data-i18n="packages.compare.date_change">Flexible date changes</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+
+            <tr class="cat-row"><td colspan="4" data-i18n="packages.compare.cat.hotel">🏨 Accommodation</td></tr>
+            <tr><td data-i18n="packages.compare.hotel_category">Hotel category</td><td data-i18n="packages.compare.hotel_3star">3-star</td><td class="feat-val" data-i18n="packages.compare.hotel_5star">5-star</td><td class="ct-gold" data-i18n="packages.compare.hotel_luxury">Luxury resort</td></tr>
+            <tr><td data-i18n="packages.compare.room_type">Room type</td><td data-i18n="packages.compare.room_standard">Standard</td><td class="feat-val" data-i18n="packages.compare.room_deluxe">Deluxe</td><td class="ct-gold" data-i18n="packages.compare.room_suite">Suite</td></tr>
+            <tr><td data-i18n="packages.compare.breakfast">Breakfast</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-check ct-check"></i></td><td class="ct-gold" data-i18n="packages.compare.full_board">Full Board</td></tr>
+            <tr><td data-i18n="packages.compare.minibar">Minibar / drinks</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-times ct-x"></i></td><td class="ct-gold"><i class="fas fa-check"></i> <span data-i18n="packages.compare.included">Included</span></td></tr>
+
+            <tr class="cat-row"><td colspan="4" data-i18n="packages.compare.cat.services">🛂 Services & Extras</td></tr>
+            <tr><td data-i18n="packages.compare.visa">Visa processing</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-check ct-check"></i> <span data-i18n="packages.compare.visa_standard">Standard</span></td><td class="ct-gold"><span data-i18n="packages.compare.visa_express">Express (24h)</span></td></tr>
+            <tr><td data-i18n="packages.compare.insurance">Travel insurance</td><td data-i18n="packages.compare.insurance_basic">Basic</td><td class="feat-val" data-i18n="packages.compare.insurance_premium">Premium</td><td class="ct-gold" data-i18n="packages.compare.insurance_vip">VIP (SAR 750K)</td></tr>
+            <tr><td data-i18n="packages.compare.tours">Guided tours</td><td><i class="fas fa-times ct-x"></i></td><td data-i18n="packages.compare.tours_2">2 tours</td><td class="ct-gold" data-i18n="packages.compare.tours_unlimited">Unlimited private</td></tr>
+            <tr><td data-i18n="packages.compare.sim">Travel SIM card</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+            <tr><td data-i18n="packages.compare.photography">Photography session</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-times ct-x"></i></td><td class="ct-gold"><i class="fas fa-check"></i> <span data-i18n="packages.compare.photography_2h">2 hours</span></td></tr>
+
+            <tr class="cat-row"><td colspan="4" data-i18n="packages.compare.cat.support">🎧 Support & Concierge</td></tr>
+            <tr><td data-i18n="packages.compare.support_availability">Support availability</td><td data-i18n="packages.compare.support_247">24/7</td><td class="feat-val" data-i18n="packages.compare.support_priority">24/7 Priority</td><td class="ct-gold" data-i18n="packages.compare.support_dedicated">Dedicated agent</td></tr>
+            <tr><td data-i18n="packages.compare.concierge">Concierge service</td><td><i class="fas fa-times ct-x"></i></td><td><i class="fas fa-check ct-check"></i></td><td class="ct-gold" data-i18n="packages.compare.concierge_vip">VIP 24/7</td></tr>
+            <tr><td data-i18n="packages.compare.emergency_line">Emergency line</td><td><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+            <tr><td data-i18n="packages.compare.price_match">Price match guarantee</td><td><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td><td><i class="fas fa-check ct-check"></i></td></tr>
+            <tr><td data-i18n="packages.compare.cancellation">Free cancellation window</td><td data-i18n="packages.compare.cancellation_24h">24 hours</td><td data-i18n="packages.compare.cancellation_48h">48 hours</td><td class="ct-gold" data-i18n="packages.compare.cancellation_7d">7 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRAVEL COST CALCULATOR
+============================================================ -->
+<section id="calculator" class="calc-section" aria-label="Travel cost calculator">
+  <div class="container-xl calc-inner">
+    <div class="text-center mb-5">
+      <span class="pg-tag" style="background:rgba(59,130,246,.2);color:#93C5FD;" data-i18n="packages.calculator.tag"><i class="fas fa-calculator"></i> Cost Calculator</span>
+      <h2 class="pg-title" style="color:#fff;" data-i18n="packages.calculator.title">Build Your Trip, See the Price</h2>
+      <p class="pg-sub" style="color:rgba(255,255,255,.55);" data-i18n="packages.calculator.sub">Adjust any detail and watch your estimated cost update in real time. All prices depart from Riyadh.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Inputs -->
+      <div class="col-lg-6">
+        <div class="calc-card">
+          <h3 style="font-family:var(--ff-body);font-size:1.05rem;font-weight:800;color:var(--text-h);margin-bottom:24px;display:flex;align-items:center;gap:8px;" data-i18n="packages.calculator.details_title"><i class="fas fa-sliders text-primary"></i> Trip Details</h3>
+
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="calc-label" data-i18n="packages.calculator.destination_region">Destination Region</label>
+              <select class="calc-input" id="calc-region" onchange="calculate()">
+                <option value="gulf" data-i18n="packages.calculator.region.gulf">Gulf & Middle East</option>
+                <option value="europe" data-i18n="packages.calculator.region.europe">Europe</option>
+                <option value="asia" data-i18n="packages.calculator.region.asia">Asia & Pacific</option>
+                <option value="americas" data-i18n="packages.calculator.region.americas">Americas</option>
+                <option value="africa" data-i18n="packages.calculator.region.africa">Africa</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="calc-label" data-i18n="packages.calculator.cabin_class">Cabin Class</label>
+              <select class="calc-input" id="calc-cabin" onchange="calculate()">
+                <option value="economy" data-i18n="packages.calculator.cabin.economy">Economy</option>
+                <option value="premium_eco" data-i18n="packages.calculator.cabin.premium_eco">Premium Economy</option>
+                <option value="business" data-i18n="packages.calculator.cabin.business">Business Class</option>
+                <option value="first" data-i18n="packages.calculator.cabin.first">First Class</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="calc-label" data-i18n="packages.calculator.hotel_rating">Hotel Rating</label>
+              <select class="calc-input" id="calc-stars" onchange="calculate()">
+                <option value="3" data-i18n="packages.calculator.hotel.3star">3-Star Hotel</option>
+                <option value="4" data-i18n="packages.calculator.hotel.4star">4-Star Hotel</option>
+                <option value="5" selected data-i18n="packages.calculator.hotel.5star">5-Star Hotel</option>
+                <option value="luxury" data-i18n="packages.calculator.hotel.luxury">Luxury Resort</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="calc-label" data-i18n="packages.calculator.travel_month">Travel Month</label>
+              <select class="calc-input" id="calc-month" onchange="calculate()">
+                <option value="1" data-i18n="packages.calculator.month.jan">January</option>
+                <option value="2" data-i18n="packages.calculator.month.feb">February</option>
+                <option value="3" data-i18n="packages.calculator.month.mar">March</option>
+                <option value="4" data-i18n="packages.calculator.month.apr">April</option>
+                <option value="5" data-i18n="packages.calculator.month.may">May</option>
+                <option value="6" selected data-i18n="packages.calculator.month.jun">June</option>
+                <option value="7" data-i18n="packages.calculator.month.jul">July</option>
+                <option value="8" data-i18n="packages.calculator.month.aug">August</option>
+                <option value="9" data-i18n="packages.calculator.month.sep">September</option>
+                <option value="10" data-i18n="packages.calculator.month.oct">October</option>
+                <option value="11" data-i18n="packages.calculator.month.nov">November</option>
+                <option value="12" data-i18n="packages.calculator.month.dec">December</option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <label class="calc-label" data-i18n="packages.calculator.passengers">Passengers</label>
+              <div class="pax-stepper">
+                <button class="pax-btn" onclick="changePax(-1)" type="button"><i class="fas fa-minus"></i></button>
+                <div class="pax-val" id="pax-display">2</div>
+                <button class="pax-btn" onclick="changePax(1)" type="button"><i class="fas fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="calc-label" data-i18n="packages.calculator.duration">Trip Duration (nights)</label>
+              <select class="calc-input" id="calc-nights" onchange="calculate()">
+                <option value="3" data-i18n="packages.calculator.duration.3">3 nights</option>
+                <option value="5" data-i18n="packages.calculator.duration.5">5 nights</option>
+                <option value="7" selected data-i18n="packages.calculator.duration.7">7 nights</option>
+                <option value="10" data-i18n="packages.calculator.duration.10">10 nights</option>
+                <option value="14" data-i18n="packages.calculator.duration.14">14 nights</option>
+                <option value="21" data-i18n="packages.calculator.duration.21">21 nights</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:22px;margin-bottom:8px;font-size:.78rem;font-weight:700;color:var(--text-h);letter-spacing:.2px;" data-i18n="packages.calculator.addons_title">Add-On Services</div>
+          <div class="row g-2">
+            <div class="col-sm-6">
+              <label class="addon-check"><input type="checkbox" id="add-visa" onchange="calculate()" checked><i class="fas fa-passport" style="color:var(--blue);"></i><span data-i18n="packages.calculator.addons.visa">Visa Processing</span><span class="ac-price" data-i18n="packages.calculator.addons.visa_price">SAR 500/pax</span></label>
+            </div>
+            <div class="col-sm-6">
+              <label class="addon-check"><input type="checkbox" id="add-insurance" onchange="calculate()" checked><i class="fas fa-shield-halved" style="color:var(--green);"></i><span data-i18n="packages.calculator.addons.insurance">Travel Insurance</span><span class="ac-price" data-i18n="packages.calculator.addons.insurance_price">SAR 150/pax</span></label>
+            </div>
+            <div class="col-sm-6">
+              <label class="addon-check"><input type="checkbox" id="add-tours" onchange="calculate()"><i class="fas fa-map-location-dot" style="color:var(--amber);"></i><span data-i18n="packages.calculator.addons.tours">Guided Tours</span><span class="ac-price" data-i18n="packages.calculator.addons.tours_price">SAR 400/pax</span></label>
+            </div>
+            <div class="col-sm-6">
+              <label class="addon-check"><input type="checkbox" id="add-transfers" onchange="calculate()"><i class="fas fa-car" style="color:var(--blue);"></i><span data-i18n="packages.calculator.addons.transfers">Private Transfers</span><span class="ac-price" data-i18n="packages.calculator.addons.transfers_price">SAR 280/trip</span></label>
+            </div>
+            <div class="col-sm-6">
+              <label class="addon-check"><input type="checkbox" id="add-sim" onchange="calculate()"><i class="fas fa-sim-card" style="color:var(--green);"></i><span data-i18n="packages.calculator.addons.sim">Travel SIM Card</span><span class="ac-price" data-i18n="packages.calculator.addons.sim_price">SAR 89/pax</span></label>
+            </div>
+            <div class="col-sm-6">
+              <label class="addon-check"><input type="checkbox" id="add-lounge" onchange="calculate()"><i class="fas fa-couch" style="color:var(--amber);"></i><span data-i18n="packages.calculator.addons.lounge">Airport Lounge</span><span class="ac-price" data-i18n="packages.calculator.addons.lounge_price">SAR 180/pax</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result -->
+      <div class="col-lg-6">
+        <div class="calc-result-card">
+          <div class="calc-result-title" data-i18n="packages.calculator.result.title"><i class="fas fa-receipt me-2" style="color:var(--blue);"></i>Your Trip Estimate</div>
+
+          <div class="calc-line">
+            <span class="cl-label" data-i18n="packages.calculator.result.flights"><i class="fas fa-plane"></i>Round-trip flights <span id="r-pax" style="font-size:.75rem;opacity:.6;"></span></span>
+            <span class="cl-val">SAR <span id="r-flights">—</span></span>
+          </div>
+          <div class="calc-line">
+            <span class="cl-label" data-i18n="packages.calculator.result.hotel"><i class="fas fa-hotel"></i>Hotel <span id="r-nights" style="font-size:.75rem;opacity:.6;"></span></span>
+            <span class="cl-val">SAR <span id="r-hotel">—</span></span>
+          </div>
+          <div class="calc-line" id="r-visa-row">
+            <span class="cl-label" data-i18n="packages.calculator.result.visa"><i class="fas fa-passport"></i>Visa processing</span>
+            <span class="cl-val">SAR <span id="r-visa">—</span></span>
+          </div>
+          <div class="calc-line">
+            <span class="cl-label" data-i18n="packages.calculator.result.insurance"><i class="fas fa-shield-halved"></i>Insurance</span>
+            <span class="cl-val">SAR <span id="r-insurance">—</span></span>
+          </div>
+          <div class="calc-line" id="r-addons-row">
+            <span class="cl-label" data-i18n="packages.calculator.result.addons"><i class="fas fa-plus-circle"></i>Optional add-ons</span>
+            <span class="cl-val">SAR <span id="r-addons">0</span></span>
+          </div>
+          <div class="calc-line">
+            <span class="cl-label" data-i18n="packages.calculator.result.service_fee"><i class="fas fa-receipt"></i>Danah service fee (5%)</span>
+            <span class="cl-val">SAR <span id="r-service">—</span></span>
+          </div>
+
+          <div class="calc-sep"></div>
+
+          <div class="calc-total-row">
+            <div>
+              <div class="calc-total-lbl" data-i18n="packages.calculator.result.total_label">Estimated Total</div>
+              <div class="calc-pp" id="r-perperson" data-i18n="packages.calculator.result.per_person">Per person: SAR —</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:.7rem;color:rgba(255,255,255,.35);margin-bottom:2px;" data-i18n="packages.calculator.result.currency">SAR</div>
+              <div class="calc-total-val" id="r-total">—</div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;padding:12px 14px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:10px;display:flex;align-items:center;gap:9px;">
+            <i class="fas fa-fire" style="color:var(--amber);font-size:.85rem;flex-shrink:0;"></i>
+            <span style="font-size:.78rem;color:rgba(255,255,255,.65);" data-i18n-html="packages.calculator.discount_note">Book before <strong style="color:var(--amber);">31 Aug 2026</strong> with code <strong style="color:var(--amber);">DANAH15</strong> and save 15% on this estimate.</span>
+          </div>
+
+          <div class="calc-note" data-i18n="packages.calculator.result.note">Estimate based on average seasonal pricing. Actual fares may vary by airline availability, date, and current promotions. Visa fees shown for Saudi passport holders.</div>
+
+          <button class="btn-get-quote" onclick="showToast('success','Quote Request Sent!','A Danah consultant will call you within 2 hours with a confirmed price for this itinerary.')" data-i18n="packages.calculator.get_quote_btn">
+            <i class="fas fa-paper-plane"></i> Get a Confirmed Quote
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DESTINATION PRICING
+============================================================ -->
+<section id="destinations" class="section-py bg-2" aria-label="Destination pricing" data-i18n-aria-label="packages.destinations.aria">
+  <div class="container-xl">
+    <div class="text-center mb-4">
+      <span class="pg-tag" data-i18n="packages.destinations.tag"><i class="fas fa-globe"></i> Destination Prices</span>
+      <h2 class="pg-title" data-i18n="packages.destinations.title">Flight Prices from Riyadh</h2>
+      <p class="pg-sub" data-i18n="packages.destinations.sub">Economy one-way fares and 7-night package starting prices. All prices depart from King Khalid International Airport (RUH).</p>
+    </div>
+
+    <!-- Search -->
+    <div class="dest-search-wrap">
+      <input type="text" class="dest-search" id="dest-search" data-i18n-placeholder="packages.destinations.search_placeholder" placeholder="Search destination…" oninput="filterSearch()">
+      <i class="fas fa-search dest-search-icon"></i>
+    </div>
+
+    <!-- Region filters -->
+    <div class="dest-filter-bar">
+      <button class="df-btn on" onclick="setFilter('all',this)" data-i18n="packages.destinations.filter_all"><i class="fas fa-earth-americas"></i> All Destinations <span class="df-count" id="count-all">27</span></button>
+      <button class="df-btn" onclick="setFilter('gulf',this)" data-i18n="packages.destinations.filter_gulf"><i class="fas fa-mosque"></i> Gulf <span class="df-count">7</span></button>
+      <button class="df-btn" onclick="setFilter('europe',this)" data-i18n="packages.destinations.filter_europe"><i class="fas fa-landmark"></i> Europe <span class="df-count">8</span></button>
+      <button class="df-btn" onclick="setFilter('asia',this)" data-i18n="packages.destinations.filter_asia"><i class="fas fa-torii-gate"></i> Asia <span class="df-count">7</span></button>
+      <button class="df-btn" onclick="setFilter('americas',this)" data-i18n="packages.destinations.filter_americas"><i class="fas fa-flag-usa"></i> Americas <span class="df-count">3</span></button>
+      <button class="df-btn" onclick="setFilter('africa',this)" data-i18n="packages.destinations.filter_africa"><i class="fas fa-sun"></i> Africa <span class="df-count">2</span></button>
+    </div>
+
+    <div class="dest-count-label" id="dest-count-label"></div>
+    <div class="dest-grid" id="dest-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ADD-ON SERVICES
+============================================================ -->
+<section id="addons" class="section-py" aria-label="Add-on services">
+  <div class="container-xl">
+    <div class="text-center mb-5">
+      <span class="pg-tag" data-i18n="packages.addons.tag"><i class="fas fa-plus-circle"></i> Add-Ons</span>
+      <h2 class="pg-title" data-i18n="packages.addons.title">Enhance Your Trip</h2>
+      <p class="pg-sub" data-i18n="packages.addons.sub">Add any of these services to your existing package or standalone booking. All add-ons can be booked up to 48 hours before departure.</p>
+    </div>
+    <div class="addon-grid">
+      <div class="addon-card reveal">
+        <div class="addon-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.insurance.name">Travel Insurance</div>
+        <div class="addon-desc" data-i18n="packages.addons.insurance.desc">Comprehensive medical, trip cancellation, lost baggage, and emergency repatriation coverage. Three tiers available.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.from_price">Starting from</div><div class="addon-price">SAR 150<span style="font-size:.7rem;font-weight:600;color:var(--text-muted);" data-i18n="packages.addons.per_person"> / person</span></div></div>
+          <button class="btn-addon" onclick="showToast('info','Insurance Added','Please specify traveller details at checkout.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d1">
+        <div class="addon-icon" style="background:rgba(139,92,246,.1);color:#7C3AED;"><i class="fas fa-couch"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.lounge.name">Airport Lounge Access</div>
+        <div class="addon-desc" data-i18n="packages.addons.lounge.desc">Access to premium airport lounges worldwide including hot meals, Wi-Fi, showers, and dedicated check-in. Valid for both departure and arrival.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.per_person_label">Per person</div><div class="addon-price">SAR 180</div></div>
+          <button class="btn-addon" onclick="showToast('info','Lounge Added','Lounge access vouchers will be emailed after booking.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d2">
+        <div class="addon-icon" style="background:rgba(16,185,129,.1);color:var(--green);"><i class="fas fa-car"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.transfer.name">Private Airport Transfer</div>
+        <div class="addon-desc" data-i18n="packages.addons.transfer.desc">Door-to-door private vehicle pickup and drop-off at your destination. Available as sedan (1-3 pax), SUV (4-6 pax), or minivan (7-12 pax).</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.per_trip_from">Per trip from</div><div class="addon-price">SAR 280</div></div>
+          <button class="btn-addon" onclick="showToast('info','Transfer Added','Your driver details will be confirmed 24h before arrival.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d3">
+        <div class="addon-icon" style="background:rgba(245,158,11,.1);color:var(--amber);"><i class="fas fa-camera"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.photography.name">Professional Photography</div>
+        <div class="addon-desc" data-i18n="packages.addons.photography.desc">A local professional photographer accompanies you for a 2-hour session. Perfect for anniversaries, honeymoons, and family trips. Edited photos delivered within 48 hours.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.per_session">Per session</div><div class="addon-price">SAR 1,200</div></div>
+          <button class="btn-addon" onclick="showToast('info','Photography Booked','We\'ll confirm your photographer 72h before arrival.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d4">
+        <div class="addon-icon" style="background:rgba(239,68,68,.1);color:var(--red);"><i class="fas fa-map-location-dot"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.tours.name">Guided City Tours</div>
+        <div class="addon-desc" data-i18n="packages.addons.tours.desc">Half-day or full-day private guided tours with an English or Arabic speaking guide. Covers major sights, hidden gems, and local food experiences.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.per_person_from">Per person from</div><div class="addon-price">SAR 350</div></div>
+          <button class="btn-addon" onclick="showToast('info','Tour Added','Choose your preferred tour at checkout.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d5">
+        <div class="addon-icon" style="background:rgba(59,130,246,.1);color:var(--blue);"><i class="fas fa-sim-card"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.sim.name">International Travel SIM</div>
+        <div class="addon-desc" data-i18n="packages.addons.sim.desc">Unlimited data SIM card valid for your destination country. Delivered to your home address or available at the airport before departure. No roaming fees.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.per_person_label">Per person</div><div class="addon-price">SAR 89</div></div>
+          <button class="btn-addon" onclick="showToast('info','SIM Added','Your SIM will be ready for pickup at RUH departure gate.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d1">
+        <div class="addon-icon" style="background:rgba(16,185,129,.1);color:var(--green);"><i class="fas fa-passport"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.express_visa.name">Express Visa Processing</div>
+        <div class="addon-desc" data-i18n="packages.addons.express_visa.desc">Standard visa is included in Business & Premium packages. For Economy or standalone bookings, our team handles all documentation with a 98.4% approval rate.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.standard_from">Standard from</div><div class="addon-price">SAR 500</div></div>
+          <button class="btn-addon" onclick="showToast('info','Visa Added','Nora from our visa team will contact you within 24h.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+      <div class="addon-card reveal d2">
+        <div class="addon-icon" style="background:rgba(245,158,11,.1);color:var(--amber);"><i class="fas fa-wine-glass"></i></div>
+        <div class="addon-name" data-i18n="packages.addons.honeymoon.name">Honeymoon & Special Occasions</div>
+        <div class="addon-desc" data-i18n="packages.addons.honeymoon.desc">Room upgrades, rose petals, celebration cake, couples spa credit (SAR 400), and a champagne welcome. Available for any package with prior notice.</div>
+        <div class="addon-price-row">
+          <div><div class="addon-from" data-i18n="packages.addons.per_booking">Per booking</div><div class="addon-price">SAR 850</div></div>
+          <button class="btn-addon" onclick="showToast('info','Celebration Package Added','Our team will personalise the details for you.')" data-i18n="packages.addons.add_btn">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MEMBERSHIP / SUBSCRIPTION
+============================================================ -->
+<section id="membership" class="section-py bg-2" aria-label="Danah membership plans" data-i18n-aria-label="packages.membership.aria">
+  <div class="container-xl">
+    <div class="text-center mb-2">
+      <span class="pg-tag" data-i18n="packages.membership.tag"><i class="fas fa-crown"></i> Danah Membership</span>
+      <h2 class="pg-title" data-i18n="packages.membership.title">Travel More, Pay Less</h2>
+      <p class="pg-sub" data-i18n="packages.membership.sub">Subscribe to a Danah membership and unlock permanent discounts, priority booking, and a dedicated travel consultant.</p>
+    </div>
+
+    <!-- Billing toggle -->
+    <div class="billing-toggle">
+      <span class="bt-label on" id="lbl-annual" data-i18n="packages.membership.annual">Annual</span>
+      <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
+      <span class="bt-label" id="lbl-monthly" data-i18n="packages.membership.monthly">Monthly</span>
+      <span class="save-badge" data-i18n="packages.membership.save_badge"><i class="fas fa-tag me-1"></i>Save 17% annually</span>
+    </div>
+
+    <div class="row g-4">
+      <!-- Free -->
+      <div class="col-md-6 col-lg-4">
+        <div class="mem-card reveal">
+          <div style="width:44px;height:44px;border-radius:12px;background:var(--bg-2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:1.1rem;margin-bottom:14px;"><i class="fas fa-user"></i></div>
+          <div class="mem-tier" data-i18n="packages.membership.free.tier">Explorer · Free</div>
+          <div class="mem-price">SAR 0</div>
+          <div class="mem-annual-note"></div>
+          <p class="mem-desc" data-i18n="packages.membership.free.desc">Create a free account, manage your bookings online, and receive our weekly deals newsletter.</p>
+          <ul class="mem-feats">
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.free.feats.account">Online account & booking history</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.free.feats.newsletter">Weekly deals newsletter</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.free.feats.support">Standard email support</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.free.feats.price_match">Price match guarantee</span></li>
+            <li><i class="fas fa-times" style="color:var(--text-muted);margin-top:3px;flex-shrink:0;font-size:.78rem;"></i><span style="color:var(--text-muted);" data-i18n="packages.membership.free.feats.discounts">Package discounts</span></li>
+            <li><i class="fas fa-times" style="color:var(--text-muted);margin-top:3px;flex-shrink:0;font-size:.78rem;"></i><span style="color:var(--text-muted);" data-i18n="packages.membership.free.feats.early_access">Early access to deals</span></li>
+            <li><i class="fas fa-times" style="color:var(--text-muted);margin-top:3px;flex-shrink:0;font-size:.78rem;"></i><span style="color:var(--text-muted);" data-i18n="packages.membership.free.feats.dedicated">Dedicated consultant</span></li>
+          </ul>
+          <a href="auth/signup.html" class="btn-pf btn-pf-outline" data-i18n="packages.membership.free.btn">Create Free Account</a>
+        </div>
+      </div>
+
+      <!-- Gold (Featured) -->
+      <div class="col-md-6 col-lg-4">
+        <div class="mem-card featured reveal d1">
+          <div class="mem-pop" data-i18n="packages.membership.gold.popular"><i class="fas fa-fire me-1"></i> Best Value</div>
+          <div style="width:44px;height:44px;border-radius:12px;background:rgba(245,158,11,.15);border:1.5px solid rgba(245,158,11,.3);display:flex;align-items:center;justify-content:center;color:var(--amber);font-size:1.1rem;margin-bottom:14px;"><i class="fas fa-medal"></i></div>
+          <div class="mem-tier" data-i18n="packages.membership.gold.tier">Gold Member</div>
+          <div class="mem-price">SAR <span class="mem-p" data-annual="490" data-monthly="49">490</span><sub> / <span class="mem-per">year</span></sub></div>
+          <div class="mem-annual-note" id="gold-note"></div>
+          <p class="mem-desc" data-i18n="packages.membership.gold.desc">Perfect for travellers who book 2–4 trips per year. Early deal access alone pays for the membership.</p>
+          <ul class="mem-feats">
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.gold.feats.everything">Everything in Explorer</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><strong data-i18n="packages.membership.gold.feats.discount">5% off</strong> <span data-i18n="packages.membership.gold.feats.all_packages">all packages & flights</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.gold.feats.early">48-hour early access to deals</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.gold.feats.visa_consult">Free visa consultation</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.gold.feats.priority_support">Priority phone support</span></li>
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.gold.feats.free_transfer">Free airport transfer (1×/year)</span></li>
+            <li><i class="fas fa-times" style="color:var(--text-muted);margin-top:3px;flex-shrink:0;font-size:.78rem;"></i><span style="color:var(--text-muted);" data-i18n="packages.membership.gold.feats.dedicated_consultant">Dedicated consultant</span></li>
+          </ul>
+          <button class="btn-pf btn-pf-fill" onclick="showToast('success','Gold Membership','Redirecting to secure checkout…')" data-i18n="packages.membership.gold.btn">Join Gold <i class="fas fa-arrow-right ms-1"></i></button>
+        </div>
+      </div>
+
+      <!-- Platinum -->
+      <div class="col-md-6 col-lg-4">
+        <div class="mem-card reveal d2">
+          <div style="width:44px;height:44px;border-radius:12px;background:rgba(139,92,246,.12);border:1.5px solid rgba(139,92,246,.25);display:flex;align-items:center;justify-content:center;color:#7C3AED;font-size:1.1rem;margin-bottom:14px;"><i class="fas fa-gem"></i></div>
+          <div class="mem-tier" data-i18n="packages.membership.platinum.tier">Platinum Elite</div>
+          <div class="mem-price">SAR <span class="mem-p" data-annual="1490" data-monthly="149">1,490</span><sub> / <span class="mem-per">year</span></sub></div>
+          <div class="mem-annual-note" id="plat-note"></div>
+          <p class="mem-desc" data-i18n="packages.membership.platinum.desc">For frequent travellers and corporate clients who demand the best — and the fastest — every time.</p>
+          <ul class="mem-feats">
+            <li><i class="fas fa-check mf-icon yes"></i><span data-i18n="packages.membership.platinum.feats.everything">Everything in Gold</span></li>
+            <li><i class="fas fa-star mf-icon gold"></i><strong data-i18n="packages.membership.platinum.feats.discount">12% off</strong> <span data-i18n="packages.membership.platinum.feats.all">all packages & flights</span></li>
+            <li><i class="fas fa-star mf-icon gold"></i><span data-i18n="packages.membership.platinum.feats.flash">Exclusive flash deals (24h head start)</span></li>
+            <li><i class="fas fa-star mf-icon gold"></i><span data-i18n="packages.membership.platinum.feats.free_visa">Free visa processing (2×/year)</span></li>
+            <li><i class="fas fa-star mf-icon gold"></i><span data-i18n="packages.membership.platinum.feats.dedicated">Dedicated personal consultant</span></li>
+            <li><i class="fas fa-star mf-icon gold"></i><span data-i18n="packages.membership.platinum.feats.lounge">Airport lounge access included</span></li>
+            <li><i class="fas fa-star mf-icon gold"></i><span data-i18n="packages.membership.platinum.feats.upgrade">Free hotel upgrade requests</span></li>
+          </ul>
+          <button class="btn-pf btn-pf-outline" onclick="showToast('success','Platinum Membership','Redirecting to secure checkout…')" data-i18n="packages.membership.platinum.btn">Join Platinum <i class="fas fa-arrow-right ms-1"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:24px;font-size:.8rem;color:var(--text-muted);" data-i18n="packages.membership.guarantee">All memberships include a 30-day money-back guarantee. Cancel anytime.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRICE ALERT / NEWSLETTER
+============================================================ -->
+<section class="section-py" aria-label="Price alerts" data-i18n-aria-label="packages.alert.aria">
+  <div class="container-xl">
+    <div class="alert-card">
+      <div class="inner">
+        <div class="alert-icon"><i class="fas fa-bell"></i></div>
+        <h2 class="alert-title" data-i18n="packages.alert.title">Never Miss a Deal</h2>
+        <p class="alert-sub" data-i18n="packages.alert.sub">Set a price alert for your dream destination. We'll notify you the moment fares drop below your target — so you book at the perfect moment.</p>
+        <form class="alert-form" id="alert-form" onsubmit="submitAlert(event)">
+          <select class="alert-dest" id="alert-dest" data-i18n="packages.alert.dest_placeholder">
+            <option value="" data-i18n="packages.alert.any_destination">Any destination</option>
+            <option>Dubai, UAE</option>
+            <option>London, UK</option>
+            <option>Istanbul, Turkey</option>
+            <option>Paris, France</option>
+            <option>Maldives</option>
+            <option>Bangkok, Thailand</option>
+            <option>Tokyo, Japan</option>
+            <option>New York, USA</option>
+            <option>Bali, Indonesia</option>
+          </select>
+          <input type="email" class="alert-email" data-i18n-placeholder="packages.alert.email_placeholder" placeholder="Enter your email address…" required>
+          <button type="submit" class="alert-submit" data-i18n="packages.alert.submit_btn"><i class="fas fa-bell me-2"></i>Set Alert</button>
+        </form>
+        <p style="margin-top:16px;font-size:.75rem;color:rgba(255,255,255,.35);" data-i18n="packages.alert.footer">No spam. Unsubscribe anytime. Join 4,800+ travellers already using price alerts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BAND
+============================================================ -->
+<section id="cta-band">
+  <div class="container-xl band-inner">
+    <span class="pg-tag" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);display:inline-flex;margin-bottom:16px;" data-i18n="packages.cta.tag">
+      <i class="fas fa-fire me-2"></i>Limited Time
+    </span>
+    <h2 data-i18n="packages.cta.title">Ready to Book Your Next Adventure?</h2>
+    <p data-i18n-html="packages.cta.desc">Use code <strong>DANAH15</strong> before 31 August 2026 and save 15% on any international package.</p>
+    <div class="d-flex justify-content-center flex-wrap gap-3">
+      <a href="index.html#booking" class="btn-blue" style="background:#fff;color:var(--blue);padding:13px 28px;" data-i18n="packages.cta.btn1">
+        <i class="fas fa-paper-plane"></i> Book Now &amp; Save 15%
+      </a>
+      <a href="index.html#contact" class="btn-ghost" style="padding:13px 28px;" data-i18n="packages.cta.btn2">
+        <i class="fas fa-phone"></i> Talk to an Expert
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPTS -->
+<script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

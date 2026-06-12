@@ -1,0 +1,157 @@
+---
+layout: base.njk
+title: Danah | Reservation Request
+description: Request a reservation. Fill in your travel details and our experts will call you back within 2 hours.
+pageScript: /assets/js/reservation-page.js
+includeHomepageScript: false
+---
+
+<!-- ==================== HERO (Reservation Focus) ==================== -->
+<section id="reservation-hero" class="section-py" style="background: linear-gradient(135deg, #0B1426 0%, #0F2050 100%); margin-top: var(--nav-h);">
+  <div class="container-xl">
+    <div class="text-center py-5">
+      <span class="tag reveal" style="background: rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.2);">
+        <i class="fas fa-calendar-check"></i> <span data-i18n="reservation.hero.tag">Secure Your Journey</span>
+      </span>
+      <h1 class="display-3 fw-bold text-white mt-3 reveal d1" data-i18n="reservation.hero.title">Request a Reservation</h1>
+      <p class="lead text-white-70 mx-auto" style="max-width: 700px;" data-i18n="reservation.hero.desc">Fill in your travel details and a Danah consultant will call you back within 2 hours to confirm availability and pricing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MULTI-STEP RESERVATION FORM ==================== -->
+<section class="section-py bg-2">
+  <div class="container-xl">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="booking-wrap" style="background: var(--bg-card); border-radius: var(--radius-lg); padding: 2rem;">
+          
+          <!-- Step Indicators -->
+          <div class="res-steps mb-5">
+            <div class="res-step" data-step="1">
+              <div class="res-step-num">1</div>
+              <span data-i18n="reservation.step1.personal">Personal Info</span>
+            </div>
+            <div class="res-step" data-step="2">
+              <div class="res-step-num">2</div>
+              <span data-i18n="reservation.step2.trip">Trip Details</span>
+            </div>
+            <div class="res-step" data-step="3">
+              <div class="res-step-num">3</div>
+              <span data-i18n="reservation.step3.confirm">Confirm</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Personal Information -->
+          <div id="step-1" class="res-step-content active">
+            <h3 class="mb-4" data-i18n="reservation.form.personal_title">Personal Information</h3>
+            <form id="reservation-step1" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.fullName">Full Name</label>
+                  <input type="text" class="form-control" id="res-fullname" data-i18n-placeholder="reservation.fullName_placeholder" placeholder="e.g. Mohammed Al-Qahtani" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.phone">Phone Number</label>
+                  <input type="tel" class="form-control" id="res-phone" data-i18n-placeholder="reservation.phone_placeholder" placeholder="+966 5X XXX XXXX" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.email">Email Address</label>
+                  <input type="email" class="form-control" id="res-email" data-i18n-placeholder="reservation.email_placeholder" placeholder="you@example.com" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.preferred_contact">Preferred Contact Method</label>
+                  <select class="form-select" id="res-contact-method">
+                    <option value="phone" data-i18n="reservation.contact_phone">Phone</option>
+                    <option value="whatsapp" data-i18n="reservation.contact_whatsapp">WhatsApp</option>
+                    <option value="email" data-i18n="reservation.contact_email">Email</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mt-4 d-flex justify-content-end">
+                <button type="button" class="btn-blue next-step" data-next="2"><span data-i18n="reservation.btn_next">Next</span> <i class="fas fa-arrow-right ms-2"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Trip Details -->
+          <div id="step-2" class="res-step-content" style="display: none;">
+            <h3 class="mb-4" data-i18n="reservation.form.trip_title">Trip Details</h3>
+            <form id="reservation-step2" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.destination">Destination</label>
+                  <input type="text" class="form-control" id="res-destination" data-i18n-placeholder="reservation.destination_placeholder" placeholder="e.g. Paris, France" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.travelDate">Travel Date</label>
+                  <input type="date" class="form-control" id="res-travel-date" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.returnDate">Return Date (optional)</label>
+                  <input type="date" class="form-control" id="res-return-date">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.travellers">Number of Travellers</label>
+                  <select class="form-select" id="res-travellers" required>
+                    <option value="" data-i18n="reservation.select">Select</option>
+                    <option value="1" data-i18n="reservation.pax1">1 Person</option>
+                    <option value="2" data-i18n="reservation.pax2">2 People</option>
+                    <option value="3-5" data-i18n="reservation.pax3">3–5 People</option>
+                    <option value="6-10" data-i18n="reservation.pax4">6–10 People</option>
+                    <option value="10+" data-i18n="reservation.pax5">Group 10+</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.packageType">Package Type</label>
+                  <select class="form-select" id="res-package">
+                    <option value="economy" data-i18n="reservation.pkg1">Economy Package</option>
+                    <option value="business" data-i18n="reservation.pkg2">Business Package</option>
+                    <option value="premium" data-i18n="reservation.pkg3">Premium Package</option>
+                    <option value="custom" data-i18n="reservation.pkg4">Custom / Bespoke</option>
+                    <option value="flight" data-i18n="reservation.pkg5">Flight Only</option>
+                    <option value="visa" data-i18n="reservation.pkg6">Visa Only</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" data-i18n="reservation.budget">Approximate Budget</label>
+                  <select class="form-select" id="res-budget">
+                    <option value="<2000" data-i18n="reservation.budget1">Below SAR 2,000</option>
+                    <option value="2000-5000" data-i18n="reservation.budget2">SAR 2,000 – 5,000</option>
+                    <option value="5000-10000" data-i18n="reservation.budget3">SAR 5,000 – 10,000</option>
+                    <option value="10000-20000" data-i18n="reservation.budget4">SAR 10,000 – 20,000</option>
+                    <option value=">20000" data-i18n="reservation.budget5">SAR 20,000+</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label" data-i18n="reservation.notes">Special Requests or Notes</label>
+                  <textarea class="form-control" id="res-notes" data-i18n-placeholder="reservation.notes_placeholder" placeholder="Any special requirements, dietary needs, preferred airlines, hotel preferences…" rows="4"></textarea>
+                </div>
+              </div>
+              <div class="mt-4 d-flex justify-content-between">
+                <button type="button" class="btn-outline prev-step" data-prev="1"><i class="fas fa-arrow-left me-2"></i> <span data-i18n="reservation.btn_prev">Back</span></button>
+                <button type="button" class="btn-blue next-step" data-next="3"><span data-i18n="reservation.btn_review">Review</span> <i class="fas fa-arrow-right ms-2"></i></button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 3: Confirmation & Submit -->
+          <div id="step-3" class="res-step-content" style="display: none;">
+            <h3 class="mb-4" data-i18n="reservation.form.confirm_title">Confirm Your Request</h3>
+            <div id="reservation-summary" class="mb-4 p-3 bg-2 rounded"></div>
+            <div class="form-check mb-4">
+              <input class="form-check-input" type="checkbox" id="agree-terms" required>
+              <label class="form-check-label" for="agree-terms" data-i18n="reservation.agree_terms">I agree to the <a href="#" data-i18n="footer.terms">Terms of Service</a> and <a href="#" data-i18n="footer.privacy">Privacy Policy</a>.</label>
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn-outline prev-step" data-prev="2"><i class="fas fa-arrow-left me-2"></i> <span data-i18n="reservation.btn_prev">Back</span></button>
+              <button type="button" id="submit-reservation" class="btn-blue"><i class="fas fa-paper-plane me-2"></i> <span data-i18n="reservation.submit">Submit Reservation Request</span></button>
+            </div>
+          </div>
+
+          <div class="form-msg mt-4" id="res-msg" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
